@@ -22,10 +22,18 @@ public class Game {
 
     public void newObstacle(){
         //TODO Lav en tilfældig obstacle og tilføj den til listen
+
     }
 
     public Player getPlayer(){
         return player;
+    }
+
+    public void background(int i)   {
+
+
+
+
     }
 
     //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
