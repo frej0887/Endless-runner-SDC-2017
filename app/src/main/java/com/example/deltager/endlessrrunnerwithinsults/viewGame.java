@@ -26,34 +26,38 @@ public class viewGame extends View  {
     Bitmap background;
     int width, height, backgroundY;
     boolean init;
+    InsultGenerator inGen;
 
     public viewGame(Context context)
     {
         super(context);
-        setup();
+        setup(context);
     }
 
     public viewGame(Context context, @Nullable AttributeSet attrs)
     {
         super(context, attrs);
-        setup();
+        setup(context);
     }
 
     public viewGame(Context context, @Nullable AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
-        setup();
+        setup(context);
     }
 
-    public void setup(){
+    public void setup(Context context){
         game = new Game();
         //background = BitmapFactory.decodeResource(this.getResources(),
         //        R.drawable.backgroundstart);
         backgroundY = 0;
         init = true;
 
+
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         //TODO: Brug den her som constructor for viewGame
+
+
     }
 
     @Override
@@ -66,6 +70,7 @@ public class viewGame extends View  {
         if (init)   {
             init = false;
             backgroundY = 0-width*13;
+
         }
 
         Paint temp = new Paint();
@@ -83,14 +88,15 @@ public class viewGame extends View  {
         @Override
         public void run() {
             //TODO Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
+
+
             try {
                 Thread.sleep(1000);
                 //Er 1 sekund
             } catch (InterruptedException e){
                 //Do nothing here
             }
-
-            //TODO: Få obstacles til at bevæge sig
+             //TODO: Få obstacles til at bevæge sig
             //TODO: Få obstacles til at spawne på korrekte tidspunkter
             //TODO: Kald postInvalidate() når grafik skal opdateres
         }
