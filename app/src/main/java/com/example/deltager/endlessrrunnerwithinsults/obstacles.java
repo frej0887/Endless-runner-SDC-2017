@@ -8,7 +8,7 @@ public class obstacles {
     private float xPos, yPos;
     private int path;
 
-    public static int randInt(int min, int max) {
+    static int randInt(int min, int max) {
         Random rand = new Random();
         int randomNum = rand.nextInt((max - min) + 1) + min;
         return randomNum;
@@ -16,7 +16,8 @@ public class obstacles {
 
     public obstacles(){
         yPos = 0;
-        path = randInt(1, 3);
+        xPos = 0;
+        path = randInt(0, 2);
     }
 
     public float getxPos() {
@@ -35,27 +36,7 @@ public class obstacles {
         this.xPos = xPos;
     }
 
-    public void setyPos(float yPos) {
-        this.yPos = yPos;
+    public void setyPos(float y) {
+        this.yPos = y;
     }
-
-    /*public void randomObst(ImageView image)  {
-        r = randInt(1, 3);
-        switch (r) {
-            case 1:
-                doStuff(image, 0);
-                break;
-
-            case 2:
-                doStuff(image, 3/10);
-                break;
-
-            case 3:
-                doStuff(image, 6/10);
-                break;
-        }
-    }*/
-
-
-
 }
