@@ -31,22 +31,22 @@ public class viewGame extends View  {
     public viewGame(Context context)
     {
         super(context);
-        setup();
+        setup(context);
     }
 
     public viewGame(Context context, @Nullable AttributeSet attrs)
     {
         super(context, attrs);
-        setup();
+        setup(context);
     }
 
     public viewGame(Context context, @Nullable AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
-        setup();
+        setup(context);
     }
 
-    public void setup(){
+    public void setup(Context context){
         game = new Game();
         game.newObstacle();
         game.newObstacle();
@@ -67,6 +67,10 @@ public class viewGame extends View  {
         //Width and height
         height = canvas.getHeight();
         width = canvas.getWidth();
+        if (init)   {
+            init = false;
+            backgroundY = 0-width*13;
+        }
 
         //Background colour
         Paint backColor = new Paint();
