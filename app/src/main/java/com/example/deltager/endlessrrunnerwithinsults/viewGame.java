@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -63,12 +64,15 @@ public class viewGame extends View  {
         //TODO: Tegn alt I jeres spil med canvas.drawBitMap(), canvas.drawRect() etc.
         //TODO: I kan få fat i jeres obstacles og spiller med game.getPlayer() og game.getObstacles()
 
+        //Width and height
         height = canvas.getHeight();
         width = canvas.getWidth();
 
+        //Background colour
         Paint backColor = new Paint();
         backColor.setColor(Color.GREEN);
 
+        //Background
         canvas.drawRect(0, 0, width, height, backColor);
 
         //Colour of the obstacle
@@ -91,8 +95,8 @@ public class viewGame extends View  {
         playerColour.setColor(Color.RED);
 
         canvas.drawCircle(width/2, (float) (0.875*height), (float) (.1*width), playerColour);
-
     }
+
 
     class Timer extends Thread{
         @Override

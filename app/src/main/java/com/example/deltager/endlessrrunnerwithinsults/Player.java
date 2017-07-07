@@ -32,4 +32,23 @@ public class Player {
     public void setyPos(int yPos) {
         this.yPos = yPos;
     }
+
+    public void collY(int playerY, int obstY)
+    {
+        if (playerY == obstY)
+        {
+            System.out.println("Du blev ramt af et obejekt");
+        }
+
+
+    }
+    public void collX(int playerX, int obstX)
+    {
+        if (playerX == obstX)
+        {
+            System.out.println("Du blev også ramt af et objekt");
+        }
+    }
+
+
 }
