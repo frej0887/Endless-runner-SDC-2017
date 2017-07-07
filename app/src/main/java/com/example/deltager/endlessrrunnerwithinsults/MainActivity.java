@@ -33,8 +33,8 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-
+        setContentView(new viewGame(this));
+/*
         image1 = (ImageView) findViewById(R.id.obst1);
         image2 = (ImageView) findViewById(R.id.obst2);
 
@@ -47,10 +47,7 @@ public class MainActivity extends Activity
 
         obst.randomObst(image1);
         obst.randomObst(image2);
-    }
-
-    public ArrayList<com.example.deltager.endlessrrunnerwithinsults.obstacles> getObstacles() {
-        return obstacles;
+        */
     }
 }
 

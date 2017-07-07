@@ -9,16 +9,25 @@ import java.util.ArrayList;
 public class Game {
 
     ArrayList<obstacles> obstacles;
+    Player player;
 
     public Game(){
         obstacles = new ArrayList<>();
+        player = new Player();
     }
 
     public ArrayList<com.example.deltager.endlessrrunnerwithinsults.obstacles> getObstacles() {
         return obstacles;
     }
 
-    public void addObstacle(obstacles obstacle){
-        obstacles.add(obstacle);
+    public void newObstacle(){
+        //TODO Lav en tilfældig obstacle og tilføj den til listen
     }
+
+    public Player getPlayer(){
+        return player;
+    }
+
+    //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
+    //TODO lav en metode som kaldes regulært fra timeren som fjerer obstacles fra listen hvis de er ude af skærmen
 }
