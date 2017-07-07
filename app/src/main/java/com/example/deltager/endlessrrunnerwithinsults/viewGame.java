@@ -1,6 +1,5 @@
 package com.example.deltager.endlessrrunnerwithinsults;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,10 +9,10 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import static com.example.deltager.endlessrrunnerwithinsults.R.drawable.backgroundstart;
 
 /**
  * Created by deltager on 06-07-17.
@@ -21,11 +20,12 @@ import java.util.Random;
 
 public class viewGame extends View  {
 
-    ArrayList<obstacles> obstacles;
+    ArrayList<obstacles> obstacle;
     Game game;
+    int width, height;
+    Paint obstColour;
     Bitmap background;
-    int width, height, backgroundY;
-    boolean init;
+    Timer timing;
 
     public viewGame(Context context)
     {
@@ -47,52 +47,73 @@ public class viewGame extends View  {
 
     public void setup(){
         game = new Game();
-        //background = BitmapFactory.decodeResource(this.getResources(),
-        //        R.drawable.backgroundstart);
-        backgroundY = 0;
-        init = true;
+        game.newObstacle();
+        game.newObstacle();
 
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         //TODO: Brug den her som constructor for viewGame
+        postInvalidate();
+
+        timing = new Timer();
+        timing.start();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         //TODO: Tegn alt I jeres spil med canvas.drawBitMap(), canvas.drawRect() etc.
-        //TODO I kan få fat i jeres obstacles og spiller med game.getPlayer() og game.getObstacles()
+        //TODO: I kan få fat i jeres obstacles og spiller med game.getPlayer() og game.getObstacles()
 
         height = canvas.getHeight();
         width = canvas.getWidth();
-        if (init)   {
-            init = false;
-            backgroundY = 0-width*13;
+
+        Paint backColor = new Paint();
+        backColor.setColor(Color.GREEN);
+
+        canvas.drawRect(0, 0, width, height, backColor);
+
+        //Colour of the obstacle
+        obstColour = new Paint();
+        obstColour.setColor(Color.BLUE);
+
+        //Arraylist of the current obstacles
+        ArrayList<obstacles> obstacles = game.getObstacles();
+
+        //Draw obstacle for ones which are currently in use
+        for(obstacles o : obstacles)    {
+            float p = (float) (0.05*width + o.getPath()*0.3*width);
+            float temp = (float) (0.3*width);
+            canvas.drawRect(p, o.getyPos(), p + temp, o.getyPos() + temp, obstColour);
         }
+//        background = BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundstart);
+//        canvas.drawBitmap(background, 0, height - background.getHeight(), null);
 
-        Paint temp = new Paint();
-        temp.setColor(Color.RED);
-        canvas.drawRect(0, 0, width/2, height, temp);
-
-        //background = Bitmap.createScaledBitmap(background, width, height, true);
-        //canvas.drawBitmap(background, 0, 0, null);
-
-        //canvas.drawRect(1/20*width + 3/10*i*width, yMovement - 3/10*width, 7/20*width + 3/10*width*i, yMovement);
+//        game.getObstacles();
+//        game.getPlayer();
 
     }
 
     class Timer extends Thread{
         @Override
         public void run() {
-            //TODO Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
-            try {
-                Thread.sleep(1000);
-                //Er 1 sekund
-            } catch (InterruptedException e){
-                //Do nothing here
-            }
+            //TODO: Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
+            for (int i = 0; i < 5000; i++) {
+                try {
+                    Thread.sleep(1000 / 60);
+                    //60fps
+                } catch (InterruptedException e) {
+                    //Do nothing here
+                }
 
-            //TODO: Få obstacles til at bevæge sig
-            //TODO: Få obstacles til at spawne på korrekte tidspunkter
-            //TODO: Kald postInvalidate() når grafik skal opdateres
+                //TODO: Få obstacles til at bevæge sig
+                for (obstacles o : game.getObstacles()) {
+                    o.setyPos(o.getyPos() + 20);
+                }
+                game.checkObstacles(height);
+                //TODO: Få obstacles til at spawne på korrekte tidspunkter
+
+                //TODO: Kald postInvalidate() når grafik skal opdateres
+                postInvalidate();
+            }
         }
     }
 }

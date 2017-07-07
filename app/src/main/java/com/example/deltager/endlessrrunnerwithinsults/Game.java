@@ -21,8 +21,7 @@ public class Game {
     }
 
     public void newObstacle(){
-        //TODO Lav en tilfældig obstacle og tilføj den til listen
-
+        obstacles.add(new obstacles());
     }
 
     public Player getPlayer(){
@@ -30,10 +29,15 @@ public class Game {
     }
 
     public void background(int i)   {
+    }
 
-
-
-
+    public void checkObstacles(float height)    {
+        for (int i = 0; i < obstacles.size(); i++) {
+            if (obstacles.get(i).getyPos() > (int) (height+1))   {
+                obstacles.remove(i);
+                newObstacle();
+            }
+        }
     }
 
     //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
