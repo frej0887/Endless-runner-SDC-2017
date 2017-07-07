@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import static com.example.deltager.endlessrrunnerwithinsults.R.drawable.backgroundstart;
 
@@ -20,13 +21,14 @@ import static com.example.deltager.endlessrrunnerwithinsults.R.drawable.backgrou
  */
 
 public class viewGame extends View  {
-
     ArrayList<obstacles> obstacle;
     Game game;
     int width, height;
     Paint obstColour, playerColour;
     Bitmap background;
     Timer timing;
+
+    InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
     public viewGame(Context context)
     {
@@ -57,6 +59,8 @@ public class viewGame extends View  {
 
         timing = new Timer();
         timing.start();
+
+
     }
 
     @Override
@@ -67,10 +71,10 @@ public class viewGame extends View  {
         //Width and height
         height = canvas.getHeight();
         width = canvas.getWidth();
-        if (init)   {
+        /*if (init)   {
             init = false;
             backgroundY = 0-width*13;
-        }
+        } */
 
         //Background colour
         Paint backColor = new Paint();
@@ -99,6 +103,8 @@ public class viewGame extends View  {
         playerColour.setColor(Color.RED);
 
         canvas.drawCircle(width/2, (float) (0.875*height), (float) (.1*width), playerColour);
+
+
     }
 
 
@@ -122,6 +128,7 @@ public class viewGame extends View  {
                 //TODO: Få obstacles til at spawne på korrekte tidspunkter
 
                 //TODO: Kald postInvalidate() når grafik skal opdateres
+
                 postInvalidate();
             }
         }

@@ -1,5 +1,7 @@
 package com.example.deltager.endlessrrunnerwithinsults;
 
+import android.util.Log;
+
 /**
  * Created by deltager on 07-07-17.
  */
@@ -33,20 +35,24 @@ public class Player {
         this.yPos = yPos;
     }
 
-    public void collY(int playerY, int obstY)
-    {
-        if (playerY == obstY)
-        {
-            System.out.println("Du blev ramt af et obejekt");
+
+
+
+    public void collY(int playerY, int obstY)    {
+        int yDist = playerY - obstY;
+        if (yDist < 20 && yDist> -20)    {
+
         }
 
 
     }
-    public void collX(int playerX, int obstX)
-    {
-        if (playerX == obstX)
-        {
-            System.out.println("Du blev også ramt af et objekt");
+
+
+    public void collX(int playerX, int obstX)    {
+        int xDist = playerX - obstX;
+
+        if (xDist < 20 && xDist > -20)    {
+
         }
     }
 

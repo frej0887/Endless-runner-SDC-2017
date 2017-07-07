@@ -3,13 +3,11 @@ package com.example.deltager.endlessrrunnerwithinsults;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 /**
  * Created by deltager on 07-07-17.
  */
 public class InsultGenerator {
-
+    public int cnt = 0;
     Context toastContext;
 
     public InsultGenerator(Context context) {
@@ -18,9 +16,6 @@ public class InsultGenerator {
 
     public void insult()
     {
-    int cnt = 0;
-
-
         String[] listOfInsults =
                 {
                 "You're a failed abortion whose birth certificate is an apology from the condom factory.", "You'll never be the man your mother is.",
@@ -31,14 +26,16 @@ public class InsultGenerator {
                 };
 
 
-        makeToast(listOfInsults[cnt]);
-        cnt++;
+        insultToast(listOfInsults[cnt]);
     }
-    public void makeToast(String theInsult)
+    public void insultToast(String theInsult)
     {
 
-    Toast toastInsult = Toast.makeText(toastContext, theInsult, Toast.LENGTH_LONG);
-    toastInsult.show();
+    if(cnt != 5) {
+        Toast toastInsult = Toast.makeText(toastContext, theInsult, Toast.LENGTH_LONG);
+        toastInsult.show();
 
+        cnt++;
+    }
     }
 }
