@@ -3,7 +3,7 @@ package com.example.deltager.endlessrrunnerwithinsults;
 import android.widget.ImageView;
 import java.util.Random;
 
-public class obstacles extends MainActivity {
+public class obstacles {
 
     private float xPos, yPos;
     private int path;
@@ -39,17 +39,7 @@ public class obstacles extends MainActivity {
         this.yPos = yPos;
     }
 
-    void doStuff(ImageView image, double place) {
-        image.setY(0-300);
-        image.setX(pxWidth * (float) place);
-        image.animate().y(pxHeight).setDuration(1000);
-        if (image.getY() > pxHeight) {
-            image.setY(0-300);
-        }
-
-    }
-
-    public void randomObst(ImageView image)  {
+    /*public void randomObst(ImageView image)  {
         r = randInt(1, 3);
         switch (r) {
             case 1:
@@ -64,7 +54,7 @@ public class obstacles extends MainActivity {
                 doStuff(image, 6/10);
                 break;
         }
-    }
+    }*/
 
 
 
