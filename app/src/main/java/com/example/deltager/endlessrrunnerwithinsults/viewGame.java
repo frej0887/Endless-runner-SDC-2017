@@ -23,7 +23,7 @@ public class viewGame extends View  {
     ArrayList<obstacles> obstacle;
     Game game;
     int width, height;
-    Paint obstColour;
+    Paint obstColour, playerColour;
     Bitmap background;
     Timer timing;
 
@@ -87,8 +87,10 @@ public class viewGame extends View  {
 //        background = BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundstart);
 //        canvas.drawBitmap(background, 0, height - background.getHeight(), null);
 
-//        game.getObstacles();
-//        game.getPlayer();
+        playerColour = new Paint();
+        playerColour.setColor(Color.RED);
+
+        canvas.drawCircle(width/2, (float) (0.875*height), (float) (.1*width), playerColour);
 
     }
 
@@ -96,7 +98,7 @@ public class viewGame extends View  {
         @Override
         public void run() {
             //TODO: Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
-            for (int i = 0; i < 5000; i++) {
+            for (int i = 0; i < Math.pow(10, 10); i++) {
                 try {
                     Thread.sleep(1000 / 60);
                     //60fps

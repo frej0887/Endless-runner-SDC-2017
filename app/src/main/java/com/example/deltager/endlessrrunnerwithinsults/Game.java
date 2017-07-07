@@ -10,6 +10,7 @@ public class Game {
 
     ArrayList<obstacles> obstacles;
     Player player;
+    boolean isAlive;
 
     public Game(){
         obstacles = new ArrayList<>();
@@ -38,6 +39,7 @@ public class Game {
                 newObstacle();
             }
         }
+
     }
 
     //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
