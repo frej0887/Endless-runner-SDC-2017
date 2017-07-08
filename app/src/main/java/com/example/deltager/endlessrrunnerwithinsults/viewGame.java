@@ -12,12 +12,13 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * Created by deltager on 06-07-17.
  */
 
-public class viewGame extends View implements View.OnTouchListener
+public class viewGame extends View
 {
     ArrayList<obstacles> obstacle;
     Game game;
@@ -29,6 +30,7 @@ public class viewGame extends View implements View.OnTouchListener
     boolean init;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
+
 
     public viewGame(Context context)
     {
@@ -48,7 +50,8 @@ public class viewGame extends View implements View.OnTouchListener
         setup(context);
     }
 
-    public void setup(Context context){
+    public void setup(Context context)
+    {
         game = new Game();
         game.newObstacle();
         game.newObstacle();
@@ -64,24 +67,49 @@ public class viewGame extends View implements View.OnTouchListener
 
 
     }
+    public void makeNewGame()
+    {
+        game = new Game();
+        game.newObstacle();
+        game.newObstacle();
+        init = true;
+
+        timing = new Timer();
+        timing.start();
+
+    }
+
+    public InsultGenerator getInsultGenerator() {
+        return insultGenerator;
+    }
+
+    public void setPlayerX(float x) {
+       game.getPlayer().setxPos(x);
+    }
+
+    public float getViewGameWidth() {
+        return width;
+    }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         //TODO: Tegn alt I jeres spil med canvas.drawBitMap(), canvas.drawRect() etc.
         //TODO: I kan få fat i jeres obstacles og spiller med game.getPlayer() og game.getObstacles()
 
         //Width and height
         height = canvas.getHeight();
         width = canvas.getWidth();
-        if (init)   {
+        if (init)
+        {
             init = false;
 
             //Player pos
-            game.getPlayer().setyPos((float) (0.875*height));
-            game.getPlayer().setxPos((float) (width/2));
+            game.getPlayer().setyPos((float) (0.875 * height));
+            game.getPlayer().setxPos((float) (width / 2));
 
             //Image scaling
-            træ1 = Bitmap.createScaledBitmap(træ1, (int)(0.3*width)+1, (int)(0.3*width)+1, true);
+            træ1 = Bitmap.createScaledBitmap(træ1, (int) (0.3 * width) + 1, (int) (0.3 * width) + 1, true);
 
         }
         //Background colour
@@ -100,10 +128,11 @@ public class viewGame extends View implements View.OnTouchListener
         ArrayList<obstacles> obstacles = game.getObstacles();
 
         //Draw obstacle for ones which are currently in use
-        for(obstacles o : obstacles)    {
-            float p = (float) (0.05*width + o.getPath()*0.3*width);
+        for (obstacles o : obstacles)
+        {
+            float p = (float) (0.05 * width + o.getPath() * 0.3 * width);
             o.setxPos(p);
-            float temp = (float) (0.3*width);
+            float temp = (float) (0.3 * width);
             //canvas.drawBitmap(p, o.getyPos(), p + temp, o.getyPos() + temp, null);
             canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
             //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
@@ -114,51 +143,46 @@ public class viewGame extends View implements View.OnTouchListener
         //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
 
 
+
         playerColour = new Paint();
         playerColour.setColor(Color.RED);
 
 //        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
-        canvas.drawRect((float) (game.getPlayer().getxPos() - .1*width), (float) (game.getPlayer().getyPos() - .1*width), (float) (game.getPlayer().getxPos() + .1*width), (float)(game.getPlayer().getyPos() + .1*width), playerColour);
+        canvas.drawRect((float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), (float) (game.getPlayer().getxPos() + .1 * width), (float) (game.getPlayer().getyPos() + .1 * width), playerColour);
 
         textColour = new Paint();
         textColour.setColor(Color.BLACK);
         textColour.setTextSize(30);
 
-        if(!game.getIsAlive()){
+        if (!game.getIsAlive())
+        {
             //canvas.drawText(insultGenerator.insult(1), 50, 50, textColour);
             insultGenerator.insult(1);
         }
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent)
+
+    class Timer extends Thread
     {
-        float touchX = motionEvent.getX();
-        float touchY = motionEvent.getY();
-        float action = motionEvent.getAction();
-        float koord  = motionEvent.ACTION_DOWN;
-        //motionEvent.ACTION_MOVE når der swipes. Koordinaterne er hvor swipet slutter
-        //motionEvent.ACTION_UP når man ikke længere rører fladen
 
-
-
-        return true;
-    }
-
-
-
-
-    class Timer extends Thread{
         @Override
-        public void run() {
-            while (game.getIsAlive()) {
-                try {
+        public void run()
+        {
+            while (game.getIsAlive())
+            {
+                // DE HER CRASHER - FIND UD AF HVORFOR PLS ;(((
+
+
+                try
+                {
                     Thread.sleep(1000 / 60);
                     //60fps
-                } catch (InterruptedException e) {
+                } catch (InterruptedException e)
+                {
                     //Do nothing here
                 }
-                for (obstacles o : game.getObstacles()) {
+                for (obstacles o : game.getObstacles())
+                {
                     o.setyPos(o.getyPos() + 20);
                     game.coll(o.getxPos(), o.getyPos(), width);
                 }
