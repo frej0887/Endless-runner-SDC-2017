@@ -9,12 +9,8 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.Timer;
-
-import static com.example.deltager.endlessrrunnerwithinsults.R.drawable.backgroundstart;
 
 /**
  * Created by deltager on 06-07-17.
@@ -27,6 +23,7 @@ public class viewGame extends View  {
     Paint obstColour, playerColour;
     Bitmap background;
     Timer timing;
+    Bitmap træ1;
     boolean init;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
@@ -56,6 +53,7 @@ public class viewGame extends View  {
         init = true;
 
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
+        træ1 = BitmapFactory.decodeResource(this.getResources(), R.mipmap.traeer_stor_web);
         //TODO: Brug den her som constructor for viewGame
         postInvalidate();
 
@@ -75,11 +73,17 @@ public class viewGame extends View  {
         width = canvas.getWidth();
         if (init)   {
             init = false;
+
+            //Player pos
             game.getPlayer().setyPos((float) (0.875*height));
             game.getPlayer().setxPos((float) (width/2));
-        }
 
+            //Image scaling
+            træ1 = Bitmap.createScaledBitmap(træ1, træ1.getWidth()*2, træ1.getHeight()*2, true);
+
+        }
         //Background colour
+
         Paint backColor = new Paint();
         backColor.setColor(Color.GREEN);
 
@@ -100,8 +104,8 @@ public class viewGame extends View  {
             float temp = (float) (0.3*width);
             canvas.drawRect(p, o.getyPos(), p + temp, o.getyPos() + temp, obstColour);
         }
-//        background = BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundstart);
-//        canvas.drawBitmap(background, 0, height - background.getHeight(), null);
+
+        canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
 
 
         playerColour = new Paint();
