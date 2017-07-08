@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.deltager.endlessrrunnerwithinsults.MainActivity" >
 
+    <!--<activity android:name=".activity"
+              android:screenOrientation="portrait">
+    </activity> -->
 
     <com.example.deltager.endlessrrunnerwithinsults.viewGame
         android:id="@+id/gameView"

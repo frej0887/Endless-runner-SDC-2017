@@ -111,7 +111,7 @@ public class viewGame extends View implements View.OnTouchListener
 
         }
 
-        //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
+        canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
 
 
         playerColour = new Paint();
@@ -151,6 +151,7 @@ public class viewGame extends View implements View.OnTouchListener
     class Timer extends Thread{
         @Override
         public void run() {
+            //TODO: Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
             while (game.getIsAlive()) {
                 try {
                     Thread.sleep(1000 / 60);
@@ -158,15 +159,19 @@ public class viewGame extends View implements View.OnTouchListener
                 } catch (InterruptedException e) {
                     //Do nothing here
                 }
+
+                //TODO: Få obstacles til at bevæge sig
                 for (obstacles o : game.getObstacles()) {
                     o.setyPos(o.getyPos() + 20);
                     game.coll(o.getxPos(), o.getyPos(), width);
                 }
                 game.checkObstacles(height);
+                //TODO: Få obstacles til at spawne på korrekte tidspunkter
 
+                //TODO: Kald postInvalidate() når grafik skal opdateres
                 postInvalidate();
             }
-
+            insultGenerator.insult();
         }
     }
 }
