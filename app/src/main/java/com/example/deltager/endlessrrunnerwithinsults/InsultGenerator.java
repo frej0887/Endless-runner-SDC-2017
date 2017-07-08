@@ -14,8 +14,7 @@ public class InsultGenerator {
             toastContext = context;
         }
 
-    public void insult()
-    {
+    public void insult()    {
         String[] listOfInsults =
                 {
                 "You're a failed abortion whose birth certificate is an apology from the condom factory.", "You'll never be the man your mother is.",
@@ -28,8 +27,7 @@ public class InsultGenerator {
 
         insultToast(listOfInsults[cnt]);
     }
-    public void insultToast(String theInsult)
-    {
+    public void insultToast(String theInsult)    {
     if(cnt != 5) {
         Toast toastInsult = Toast.makeText(toastContext, theInsult, Toast.LENGTH_LONG);
         toastInsult.show();

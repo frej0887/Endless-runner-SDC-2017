@@ -27,6 +27,7 @@ public class viewGame extends View  {
     Paint obstColour, playerColour;
     Bitmap background;
     Timer timing;
+    boolean init;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
@@ -52,6 +53,7 @@ public class viewGame extends View  {
         game = new Game();
         game.newObstacle();
         game.newObstacle();
+        init = true;
 
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         //TODO: Brug den her som constructor for viewGame
@@ -71,10 +73,11 @@ public class viewGame extends View  {
         //Width and height
         height = canvas.getHeight();
         width = canvas.getWidth();
-        /*if (init)   {
+        if (init)   {
             init = false;
-            backgroundY = 0-width*13;
-        } */
+            game.getPlayer().setyPos((float) (0.875*height));
+            game.getPlayer().setxPos((float) (width/2));
+        }
 
         //Background colour
         Paint backColor = new Paint();
@@ -93,17 +96,19 @@ public class viewGame extends View  {
         //Draw obstacle for ones which are currently in use
         for(obstacles o : obstacles)    {
             float p = (float) (0.05*width + o.getPath()*0.3*width);
+            o.setxPos(p);
             float temp = (float) (0.3*width);
             canvas.drawRect(p, o.getyPos(), p + temp, o.getyPos() + temp, obstColour);
         }
 //        background = BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundstart);
 //        canvas.drawBitmap(background, 0, height - background.getHeight(), null);
 
+
         playerColour = new Paint();
         playerColour.setColor(Color.RED);
 
-        canvas.drawCircle(width/2, (float) (0.875*height), (float) (.1*width), playerColour);
-
+//        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
+        canvas.drawRect((float) (game.getPlayer().getxPos() - .1*width), (float) (game.getPlayer().getyPos() - .1*width), (float) (game.getPlayer().getxPos() + .1*width), (float)(game.getPlayer().getyPos() + .1*width), playerColour);
 
     }
 
@@ -112,7 +117,7 @@ public class viewGame extends View  {
         @Override
         public void run() {
             //TODO: Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
-            for (int i = 0; i < Math.pow(10, 10); i++) {
+            while (game.getIsAlive()) {
                 try {
                     Thread.sleep(1000 / 60);
                     //60fps
@@ -123,16 +128,15 @@ public class viewGame extends View  {
                 //TODO: Få obstacles til at bevæge sig
                 for (obstacles o : game.getObstacles()) {
                     o.setyPos(o.getyPos() + 20);
+                    game.coll(o.getxPos(), o.getyPos(), width);
                 }
                 game.checkObstacles(height);
                 //TODO: Få obstacles til at spawne på korrekte tidspunkter
 
                 //TODO: Kald postInvalidate() når grafik skal opdateres
-
                 postInvalidate();
-
-                //game.getPlayer().coll();
             }
+            insultGenerator.insult();
         }
     }
 }

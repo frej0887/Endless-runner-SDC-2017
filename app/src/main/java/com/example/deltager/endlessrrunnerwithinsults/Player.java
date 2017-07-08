@@ -8,8 +8,8 @@ import android.util.Log;
 
 public class Player {
 
-    int xPos;
-    int yPos;
+    float xPos;
+    float yPos;
 
     public Player(){
         xPos = 0;
@@ -19,28 +19,22 @@ public class Player {
 
 
     //Setter og getters
-    public int getxPos() {
+    public float getxPos() {
         return xPos;
     }
 
-    public int getyPos() {
+    public float getyPos() {
         return yPos;
     }
 
-    public void setxPos(int xPos) {
+    public void setxPos(float xPos) {
         this.xPos = xPos;
     }
 
-    public void setyPos(int yPos) {
+    public void setyPos(float yPos) {
         this.yPos = yPos;
     }
 
 
-    public void coll(int obstX, int obstY)    {
-        int yDist = yPos - obstY;
-        int xDist = xPos - obstX;
-        if (yDist < 20 && yDist > -20 && xDist < 20 && xDist > -20)    {
-            setyPos(200);
-        }
-    }
+
 }
