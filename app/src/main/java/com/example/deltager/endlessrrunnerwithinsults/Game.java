@@ -37,8 +37,6 @@ public class Game {
     public void checkObstacles(float height)    {
 
         for (int i = 0; i < obstacles.size(); i++) {
-            getPlayer().collX(getPlayer().getxPos(), (int) obstacles.get(i).getxPos());
-            getPlayer().collY(getPlayer().getyPos(), (int) obstacles.get(i).getyPos());
 
             if (obstacles.get(i).getyPos() > (int) (height+1))   {
                 obstacles.remove(i);

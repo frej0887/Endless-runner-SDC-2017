@@ -36,25 +36,11 @@ public class Player {
     }
 
 
-
-
-    public void collY(int playerY, int obstY)    {
-        int yDist = playerY - obstY;
-        if (yDist < 20 && yDist> -20)    {
-
-        }
-
-
-    }
-
-
-    public void collX(int playerX, int obstX)    {
-        int xDist = playerX - obstX;
-
-        if (xDist < 20 && xDist > -20)    {
-
+    public void coll(int obstX, int obstY)    {
+        int yDist = yPos - obstY;
+        int xDist = xPos - obstX;
+        if (yDist < 20 && yDist > -20 && xDist < 20 && xDist > -20)    {
+            setyPos(200);
         }
     }
-
-
 }

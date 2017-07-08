@@ -130,6 +130,8 @@ public class viewGame extends View  {
                 //TODO: Kald postInvalidate() når grafik skal opdateres
 
                 postInvalidate();
+
+                //game.getPlayer().coll();
             }
         }
     }

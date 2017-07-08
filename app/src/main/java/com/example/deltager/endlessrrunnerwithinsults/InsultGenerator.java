@@ -30,7 +30,6 @@ public class InsultGenerator {
     }
     public void insultToast(String theInsult)
     {
-
     if(cnt != 5) {
         Toast toastInsult = Toast.makeText(toastContext, theInsult, Toast.LENGTH_LONG);
         toastInsult.show();
