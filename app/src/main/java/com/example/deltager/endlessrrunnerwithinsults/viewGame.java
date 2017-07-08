@@ -27,7 +27,7 @@ public class viewGame extends View
     Bitmap background;
     Timer timing;
     Bitmap træ1;
-    boolean init;
+    boolean init, onDeathInsult;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
@@ -52,18 +52,11 @@ public class viewGame extends View
 
     public void setup(Context context)
     {
-        game = new Game();
-        game.newObstacle();
-        game.newObstacle();
-        init = true;
-
+        onDeathInsult = false;
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         træ1 = BitmapFactory.decodeResource(this.getResources(), R.mipmap.traeer_stor_web);
         //TODO: Brug den her som constructor for viewGame
-        postInvalidate();
-
-        timing = new Timer();
-        timing.start();
+        makeNewGame();
 
 
     }
@@ -74,6 +67,7 @@ public class viewGame extends View
         game.newObstacle();
         init = true;
 
+        postInvalidate();
         timing = new Timer();
         timing.start();
 
@@ -154,11 +148,15 @@ public class viewGame extends View
         textColour.setColor(Color.BLACK);
         textColour.setTextSize(30);
 
-        if (!game.getIsAlive())
-        {
-            //canvas.drawText(insultGenerator.insult(1), 50, 50, textColour);
+        if(onDeathInsult){
+            //Lav et insult når playeren dør
             insultGenerator.insult(1);
+            onDeathInsult = false;
         }
+    }
+
+    public boolean getAlive(){
+        return game.getIsAlive();
     }
 
 
@@ -170,7 +168,6 @@ public class viewGame extends View
         {
             while (game.getIsAlive())
             {
-                // DE HER CRASHER - FIND UD AF HVORFOR PLS ;(((
 
 
                 try
@@ -190,7 +187,8 @@ public class viewGame extends View
 
                 postInvalidate();
             }
-
+            onDeathInsult = true;
+            postInvalidate();
         }
     }
 }

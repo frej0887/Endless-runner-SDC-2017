@@ -39,6 +39,10 @@ public class MainActivity extends Activity  {
                 switch (event.getAction())
                 {
                     case MotionEvent.ACTION_DOWN:
+                        if(!screen.getAlive()){
+                            screen.makeNewGame();
+                        }
+
                         if( x < (screen.getViewGameWidth() / 2))
                         {
                             screen.setPlayerX( (screen.getViewGameWidth() / 2) * 3/10);
