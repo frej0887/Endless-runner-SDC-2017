@@ -100,7 +100,7 @@ public class InsultGenerator
         switch (eventType) {
             case 0:
                 Toast insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
-                insultToast.show();
+                new ToastTimer(insultToast, 1).start();
                 //return listOfInsults0[0];
             case 1:
                 insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
