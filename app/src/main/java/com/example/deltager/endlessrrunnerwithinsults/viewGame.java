@@ -2,7 +2,6 @@ package com.example.deltager.endlessrrunnerwithinsults;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,7 +19,7 @@ public class viewGame extends View  {
     ArrayList<obstacles> obstacle;
     Game game;
     int width, height;
-    Paint obstColour, playerColour;
+    Paint obstColour, playerColour, textColour;
     Bitmap background;
     Timer timing;
     Bitmap træ1;
@@ -114,6 +113,14 @@ public class viewGame extends View  {
 //        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
         canvas.drawRect((float) (game.getPlayer().getxPos() - .1*width), (float) (game.getPlayer().getyPos() - .1*width), (float) (game.getPlayer().getxPos() + .1*width), (float)(game.getPlayer().getyPos() + .1*width), playerColour);
 
+        textColour = new Paint();
+        textColour.setColor(Color.BLACK);
+        textColour.setTextSize(30);
+
+        if(!game.getIsAlive()){
+            //canvas.drawText(insultGenerator.insult(1), 50, 50, textColour);
+            insultGenerator.insult(0);
+        }
     }
 
 
@@ -128,7 +135,6 @@ public class viewGame extends View  {
                 } catch (InterruptedException e) {
                     //Do nothing here
                 }
-
                 //TODO: Få obstacles til at bevæge sig
                 for (obstacles o : game.getObstacles()) {
                     o.setyPos(o.getyPos() + 20);
@@ -140,7 +146,7 @@ public class viewGame extends View  {
                 //TODO: Kald postInvalidate() når grafik skal opdateres
                 postInvalidate();
             }
-            insultGenerator.insult();
+
         }
     }
 }
