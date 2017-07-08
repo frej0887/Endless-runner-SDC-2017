@@ -18,8 +18,12 @@ public class InsultGenerator
 
     public void insult()
         {
+
+        }
+    public void insult(int eventType)    {
         String[] Dead =
                 {
+                        "You are dead. Haha",
                         "You died.",
                         "Dead, dead, DEAD!",
                         "Guess what. You died.",
@@ -68,7 +72,7 @@ public class InsultGenerator
                         "Could you please not be so bad at this game.",
                         "You are not supposed to hit the trees, stupid.",
                         "I thought humans were smarter than this.",
-                        "What a waste of both mine and your capacity."
+                        "What a waste of both mine and your capacity.",
                         "You are running in circles, human..."
 
                 };
@@ -110,27 +114,17 @@ public class InsultGenerator
                         "",
 
                 };
-        }
-    public void insult(int eventType)    {
-
-        String[] listOfInsults0 = {"You are dead. Haha"};
-        String[] listOfInsults1 = {"", "You're a failed abortion whose birth certificate is an apology from the condom factory.", "You'll never be the man your mother is.",
-                "If I wanted to kill myself I'd climb your ego and jump to your IQ.", "If ignorance is bliss, you must be the happiest person on earth.",
-                "I wasn't made with enough bad words to let you know how I feel about you.", "You are proof that evolution CAN go in reverse.",
-                "So, a thought crossed your mind? Must have been a long and lonely journey.", "I'm jealous of all the people that haven't met you!",
-                "I would love to insult you... but that would be beyond the level of your intelligence.",};
-        String[] listOfInsults2 = {"", ""};
-
-
 
         switch (eventType) {
             case 0:
-                Toast insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
+                Toast insultToast = Toast.makeText(toastContext, Dead[0], Toast.LENGTH_LONG);
                 new ToastTimer(insultToast, 1).start();
+                break;
                 //return listOfInsults0[0];
             case 1:
-                insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
+                insultToast = Toast.makeText(toastContext, listOfInsults[0], Toast.LENGTH_LONG);
                 new ToastTimer(insultToast, 3).start();
+                break;
                 //return listOfInsults1[cnt++];
             case 2:
                 //return listOfInsults2;

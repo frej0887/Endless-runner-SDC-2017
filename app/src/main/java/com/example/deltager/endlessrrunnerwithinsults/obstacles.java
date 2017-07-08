@@ -45,11 +45,13 @@ public class obstacles {
 
         switch (r) {
             case 0:
-                canvas.drawBitmap(træ1, p, o.getyPos() - træ1.getHeight(), null);
+                //canvas.drawBitmap(træ1, p, o.getyPos() - træ1.getHeight(), null);
             case 1:
-                canvas.drawBitmap(træ2, p, o.getyPos() - træ2.getHeight(), null);
+                //canvas.drawBitmap(træ2, p, o.getyPos() - træ2.getHeight(), null);
             case 2:
-                canvas.drawBitmap(træ3, p, o.getyPos() - træ2.getHeight(), null);
+                //canvas.drawBitmap(træ3, p, o.getyPos() - træ2.getHeight(), null);
+
+                //MANGLER
         }
     }
 }

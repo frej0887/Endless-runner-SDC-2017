@@ -24,9 +24,8 @@ public class viewGame extends View
     Game game;
     int width, height;
     Paint obstColour, playerColour, textColour;
-    Bitmap background;
     Timer timing;
-    Bitmap træ1;
+    Bitmap background, træ1, player, deathscreen;
     boolean init, onDeathInsult;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
@@ -55,6 +54,8 @@ public class viewGame extends View
         onDeathInsult = false;
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         træ1 = BitmapFactory.decodeResource(this.getResources(), R.mipmap.traeer_stor_web);
+        player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ballweb);
+        deathscreen = BitmapFactory.decodeResource(this.getResources(), R.mipmap.deathscreenweb);
         //TODO: Brug den her som constructor for viewGame
         makeNewGame();
 
@@ -109,7 +110,9 @@ public class viewGame extends View
         //Background colour
 
         Paint backColor = new Paint();
+        Paint backColor2 = new Paint();
         backColor.setColor(Color.GREEN);
+        backColor2.setColor(Color.BLACK);
 
         //Background
         canvas.drawRect(0, 0, width, height, backColor);
@@ -142,7 +145,8 @@ public class viewGame extends View
         playerColour.setColor(Color.RED);
 
 //        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
-        canvas.drawRect((float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), (float) (game.getPlayer().getxPos() + .1 * width), (float) (game.getPlayer().getyPos() + .1 * width), playerColour);
+        player = Bitmap.createScaledBitmap(player, (int) (width*.2), (int) (.2*width), true);
+        canvas.drawBitmap(player, (float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), null);
 
         textColour = new Paint();
         textColour.setColor(Color.BLACK);
@@ -150,8 +154,11 @@ public class viewGame extends View
 
         if(onDeathInsult){
             //Lav et insult når playeren dør
-            insultGenerator.insult(1);
+            insultGenerator.insult(0);
             onDeathInsult = false;
+            canvas.drawRect(0, 0, width, height, backColor2);
+            deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366*width), true);
+            canvas.drawBitmap(deathscreen, 0, height/2 - deathscreen.getHeight()/2, null);
         }
     }
 
@@ -180,7 +187,7 @@ public class viewGame extends View
                 }
                 for (obstacles o : game.getObstacles())
                 {
-                    o.setyPos(o.getyPos() + 20);
+                    o.setyPos((float)(o.getyPos() + width*.02));
                     game.coll(o.getxPos(), o.getyPos(), width);
                 }
                 game.checkObstacles(height);
