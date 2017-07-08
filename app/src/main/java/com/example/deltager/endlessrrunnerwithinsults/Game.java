@@ -13,11 +13,14 @@ public class Game {
     ArrayList<obstacles> obstacles;
     Player player;
     boolean isAlive;
+    int obstPassed;
+    InsultGenerator insultG;
 
     public Game(){
         obstacles = new ArrayList<>();
         player = new Player();
         isAlive = true;
+        obstPassed = 0;
     }
 
     public ArrayList<com.example.deltager.endlessrrunnerwithinsults.obstacles> getObstacles() {
@@ -32,6 +35,13 @@ public class Game {
         return player;
     }
 
+    public int getObstPassed() {
+        return obstPassed;
+    }
+    public void setObstPassed(int obstP) {
+        obstPassed = obstP;
+    }
+
     public void background(int i)   {
     }
 
@@ -40,8 +50,11 @@ public class Game {
         for (int i = 0; i < obstacles.size(); i++) {
 
             if (obstacles.get(i).getyPos() > (int) (height+1))   {
+
                 obstacles.remove(i);
+                obstPassed++;
                 newObstacle();
+                checkObstaclesPassed(getObstPassed());
             }
 
         }
@@ -59,6 +72,15 @@ public class Game {
         return isAlive;
     }
 
+
     //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
     //TODO lav en metode som kaldes regulært fra timeren som fjerer obstacles fra listen hvis de er ude af skærmen
+
+    public void checkObstaclesPassed (int obstPassed)
+    {
+        if(obstPassed >= 10) {
+            insultG.insult(1);      //Crasher ved kaldet til insult metoden.
+        }
+
+    }
 }

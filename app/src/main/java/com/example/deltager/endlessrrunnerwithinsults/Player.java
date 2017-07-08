@@ -35,6 +35,11 @@ public class Player {
         this.yPos = yPos;
     }
 
+    public void objectPassed(float playerY, float obstY )
+    {
+
+    }
+
 
 
 }

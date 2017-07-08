@@ -193,6 +193,7 @@ public class viewGame extends View
                 game.checkObstacles(height);
                 //TODO: Få obstacles til at spawne på korrekte tidspunkter
 
+
                 //TODO: Kald postInvalidate() når grafik skal opdateres
                 postInvalidate();
             }

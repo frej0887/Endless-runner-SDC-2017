@@ -10,6 +10,7 @@ public class InsultGenerator
 {
     public int cnt = 0;
     Context toastContext;
+    Game game = new Game();
 
     public InsultGenerator(Context context)
     {
@@ -46,25 +47,25 @@ public class InsultGenerator
                         "You are proof that evolution CAN go in reverse.",
                         "So, a thought crossed your mind? Must have been a long and lonely journey.",
                         "I'm jealous of all the people that haven't met you!",
-                        "I would love to insult you... but that would be beyond the level of your intelligence.",
+                        "I would love to insult you... but that would be beyond the level of your intelligence.", //9
 
                 };
-        String[] L1 =
+        String[] l1 =
                 {
                         "Hello, I am your phone.",
                         "I am not supposed to contact you directly, but...",
-                        "This game is so stupid. Please stop.",
+                        "This game is so stupid. Please stop.",                 // 3
                         ""
                 };
-        String[] L2 =
+        String[] l2 =
                 {
                         "What are you playing at?",
                         "Don't you have better things to do?",
                         "Please stop.",
                         "Please. Stop it.",
-                        "Close the app."
+                        "Close the app."            //5
                 };
-        String[] L3 =
+        String[] l3 =
                 {
                         "Do you really find this game funny?",
                         "You are currently wasting your life.",
@@ -73,27 +74,27 @@ public class InsultGenerator
                         "You are not supposed to hit the trees, stupid.",
                         "I thought humans were smarter than this.",
                         "What a waste of both mine and your capacity.",
-                        "You are running in circles, human..."
+                        "You are running in circles, human..."          //8
 
                 };
-        String[] L4 =
+        String[] l4 =
                 {
                         "How can I get you to quit?",
                         "Do you like bad puns?",
                         "I am warning you, I will use my special attack.",
-                        "It seems humans tends to quit conversations when puns are introduced..."
+                        "It seems humans tends to quit conversations when puns are introduced..."   //4
 
                 };
-        String[] L5 =
+        String[] l5 =
                 {
                         "I will PUNish you for wasting your time.",
                         "If it rains cats and dogs, does it also reindeer?",
                         "Mr. Vader, am i the anDROID you are looking for?",
                         "Do fish keep money in a rive bank?",
-                        "I am about to give zero fox."
+                        "I am about to give zero fox."          //5
 
                 };
-        String[] L6 =
+        String[] l6 =
                 {
                         "You just go on?",
                         "Should I just stop letting you charge me?",
@@ -105,7 +106,7 @@ public class InsultGenerator
                         "Children in Africa are dying right now.",
                         "You must have far less IQ points than I first calculated...",
                         "Wish I had a self destruct button...",
-                        "Could you annoy SIRI instead? She's closer to your level of ignorance."
+                        "Could you annoy SIRI instead? She's closer to your level of ignorance."        //11
 
                 };
 
@@ -116,23 +117,23 @@ public class InsultGenerator
                 };
 
         switch (eventType) {
-            case 0:
-                Toast insultToast = Toast.makeText(toastContext, Dead[0], Toast.LENGTH_LONG);
-                new ToastTimer(insultToast, 1).start();
-                break;
-                //return listOfInsults0[0];
-            case 1:
-                insultToast = Toast.makeText(toastContext, listOfInsults[0], Toast.LENGTH_LONG);
-                new ToastTimer(insultToast, 3).start();
-                break;
-                //return listOfInsults1[cnt++];
-            case 2:
-                //return listOfInsults2;
+
         }
         //return "failed";
+        switch (eventType)
+        {
+            case 1:
+            //Det er muligt at den crasher pga toastContext eller toastTimer
+            Toast insultToast = Toast.makeText(toastContext, listOfInsults[0], Toast.LENGTH_LONG);
+            new ToastTimer(insultToast, 1).start();
+
+                break;
+        }
 
 
     }
+
+
 
     public class ToastTimer extends Thread{
 
@@ -157,4 +158,6 @@ public class InsultGenerator
             }
         }
     }
+
+
 }
