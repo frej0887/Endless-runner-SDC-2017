@@ -2,11 +2,13 @@ package com.example.deltager.endlessrrunnerwithinsults;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.ArrayList;
  * Created by deltager on 06-07-17.
  */
 
-public class viewGame extends View  {
+public class viewGame extends View implements View.OnTouchListener
+{
     ArrayList<obstacles> obstacle;
     Game game;
     int width, height;
@@ -78,7 +81,7 @@ public class viewGame extends View  {
             game.getPlayer().setxPos((float) (width/2));
 
             //Image scaling
-            træ1 = Bitmap.createScaledBitmap(træ1, træ1.getWidth()*2, træ1.getHeight()*2, true);
+            træ1 = Bitmap.createScaledBitmap(træ1, (int)(0.3*width)+1, (int)(0.3*width)+1, true);
 
         }
         //Background colour
@@ -101,10 +104,14 @@ public class viewGame extends View  {
             float p = (float) (0.05*width + o.getPath()*0.3*width);
             o.setxPos(p);
             float temp = (float) (0.3*width);
-            canvas.drawRect(p, o.getyPos(), p + temp, o.getyPos() + temp, obstColour);
+            //canvas.drawBitmap(p, o.getyPos(), p + temp, o.getyPos() + temp, null);
+            canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
+            //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
+
+
         }
 
-        canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
+        //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
 
 
         playerColour = new Paint();
@@ -119,15 +126,31 @@ public class viewGame extends View  {
 
         if(!game.getIsAlive()){
             //canvas.drawText(insultGenerator.insult(1), 50, 50, textColour);
-            insultGenerator.insult(0);
+            insultGenerator.insult(1);
         }
     }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent)
+    {
+        float touchX = motionEvent.getX();
+        float touchY = motionEvent.getY();
+        float action = motionEvent.getAction();
+        float koord  = motionEvent.ACTION_DOWN;
+        //motionEvent.ACTION_MOVE når der swipes. Koordinaterne er hvor swipet slutter
+        //motionEvent.ACTION_UP når man ikke længere rører fladen
+
+
+
+        return true;
+    }
+
+
 
 
     class Timer extends Thread{
         @Override
         public void run() {
-            //TODO: Dette er jeres timer. Det er det eneste sted at I kan lave et delay. Et delay ser således ud:
             while (game.getIsAlive()) {
                 try {
                     Thread.sleep(1000 / 60);
@@ -135,15 +158,12 @@ public class viewGame extends View  {
                 } catch (InterruptedException e) {
                     //Do nothing here
                 }
-                //TODO: Få obstacles til at bevæge sig
                 for (obstacles o : game.getObstacles()) {
                     o.setyPos(o.getyPos() + 20);
                     game.coll(o.getxPos(), o.getyPos(), width);
                 }
                 game.checkObstacles(height);
-                //TODO: Få obstacles til at spawne på korrekte tidspunkter
 
-                //TODO: Kald postInvalidate() når grafik skal opdateres
                 postInvalidate();
             }
 

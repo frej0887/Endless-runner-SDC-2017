@@ -31,12 +31,41 @@ public class InsultGenerator
         switch (eventType) {
             case 0:
                 Toast insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
+                insultToast.show();
                 //return listOfInsults0[0];
             case 1:
+                insultToast = Toast.makeText(toastContext, listOfInsults0[0], Toast.LENGTH_LONG);
+                new ToastTimer(insultToast, 3).start();
                 //return listOfInsults1[cnt++];
             case 2:
                 //return listOfInsults2;
         }
         //return "failed";
+
+
+    }
+
+    public class ToastTimer extends Thread{
+
+        Toast toast;
+        int times;
+
+        public ToastTimer(Toast toastToShow, int timesShown){
+            toast = toastToShow;
+            times = timesShown;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < times; i++)
+            {
+                toast.show();
+                try{
+                    Thread.sleep(3500);
+                } catch (InterruptedException e){
+                    //nothing
+                }
+            }
+        }
     }
 }
