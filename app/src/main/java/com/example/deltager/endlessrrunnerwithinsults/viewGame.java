@@ -26,7 +26,7 @@ public class viewGame extends View
     Paint obstColour, playerColour, textColour;
     Timer timing;
     Bitmap background, træ1, player, deathscreen;
-    boolean init, onDeathInsult;
+    boolean init, onDeathInsult, updateObject;
     boolean printInsult = false;
     int deathCnt = 0;
 
@@ -78,6 +78,7 @@ public class viewGame extends View
         game.newObstacle();
         game.newObstacle();
         init = true;
+        updateObject = true;
         insultTimer = 0;
 
         postInvalidate();
@@ -134,6 +135,14 @@ public class viewGame extends View
         ArrayList<obstacles> obstacles = game.getObstacles();
 
         //Draw obstacle for ones which are currently in use
+        if(updateObject){
+            updateObject = false;
+            for (obstacles o : game.getObstacles()) {
+                o.setyPos((float) (o.getyPos() + width * .02));
+                game.coll(o.getxPos(), o.getyPos(), width);
+            }
+            game.checkObstacles(height);
+        }
         for (obstacles o : obstacles)
         {
             //TODO Crash her pga multiple access
@@ -183,23 +192,14 @@ public class viewGame extends View
             {
             while (game.getIsAlive())
             {
-                    Thread.sleep(1000 / 60);
-                    //60fps
+                Thread.sleep(1000 / 60);
+                //60fps
 
                 insultTimer++;
                 if (insultTimer >= 300){
                     printInsult = true;
                 }
-                for (obstacles o : game.getObstacles())
-                {
-                    o.setyPos((float)(o.getyPos() + width*.02));
-                    game.coll(o.getxPos(), o.getyPos(), width);
-                }
-                game.checkObstacles(height);
-                //TODO: Få obstacles til at spawne på korrekte tidspunkter
-
-
-                //TODO: Kald postInvalidate() når grafik skal opdateres
+                updateObject = true;
                 postInvalidate();
             }
             onDeathInsult = true;
