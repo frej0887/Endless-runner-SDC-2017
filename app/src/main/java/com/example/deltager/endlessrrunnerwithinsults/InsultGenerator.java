@@ -188,7 +188,7 @@ public class InsultGenerator
             insultToast.setGravity(Gravity.TOP, 0, 0);
             timeren = new ToastTimer(insultToast, 1);
                 timeren.start();
-                if(cnt > 39)
+                if(cnt > fullListOfInsults.length)
                 {
                     cnt = 0;
                 }
