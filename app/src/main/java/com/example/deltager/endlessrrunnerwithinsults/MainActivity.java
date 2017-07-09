@@ -34,7 +34,7 @@ public class MainActivity extends Activity  {
             @Override
             public boolean onTouch (View view, MotionEvent event)
             {
-                int x = (int) event.getX();
+                float x = event.getX();
                 int y = (int) event.getY();
                 viewGame screen = (viewGame) view;
 
@@ -45,12 +45,17 @@ public class MainActivity extends Activity  {
                             screen.makeNewGame(me);
                         }
 
-                        if( x < (screen.getViewGameWidth() / 2))
+                        if( x < (screen.getViewGameWidth() / 3))
                         {
                             screen.setPlayerX( (screen.getViewGameWidth() / 2) * 3/10);
-                        } else
+                        }
+                        if(x > (screen.getViewGameWidth() / 3) && x < ((screen.getViewGameWidth()) / 3) * 2)
                         {
-                            screen.setPlayerX( (screen.getViewGameWidth() / 2) * 17/10);
+                            screen.setPlayerX( (screen.getViewGameWidth() / 2));
+                        }
+                        if(x > ((screen.getViewGameWidth()) / 3) * 2 )
+                        {
+                            screen.setPlayerX( (screen.getViewGameWidth() / 2) * (float)(1.7));
                         }
 
                         //Trykkes
@@ -60,7 +65,7 @@ public class MainActivity extends Activity  {
                         break;
                     case MotionEvent.ACTION_UP:
                         //Stop af tryk
-                        screen.setPlayerX(screen.getViewGameWidth() / 2);
+                        //screen.setPlayerX(screen.getViewGameWidth() / 2);
                         break;
                 }
                 return true;

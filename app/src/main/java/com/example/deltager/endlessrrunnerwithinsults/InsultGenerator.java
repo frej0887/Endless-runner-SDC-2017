@@ -148,7 +148,7 @@ public class InsultGenerator
                         "Children in Africa are dying right now.",
                         "You must have far less IQ points than I first calculated...",
                         "Wish I had a self destruct button...",
-                        "Could you annoy SIRI instead? She's closer to your level of ignorance.",
+                        "Could you annoy CLEVERBOT instead? She's closer to your level of ignorance.",
 
                         "Your birth certificate is an apology from the condom factory.",
                         "You'll never be the man your mother is.",
@@ -178,6 +178,10 @@ public class InsultGenerator
         }
         switch (eventType)
         {
+            case 0:
+                Toast insultToastDead = Toast.makeText(toastContext, Dead[0], Toast.LENGTH_LONG);
+                insultToastDead.setGravity(Gravity.TOP, 0, 0);
+            break;
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
             Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);

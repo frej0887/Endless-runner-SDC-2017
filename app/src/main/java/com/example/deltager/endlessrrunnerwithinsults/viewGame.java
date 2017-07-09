@@ -123,9 +123,6 @@ public class viewGame extends View
         //Background
         canvas.drawRect(0, 0, width, height, backColor);
 
-        //Colour of the obstacle
-        obstColour = new Paint();
-        obstColour.setColor(Color.BLUE);
 
         //Arraylist of the current obstacles
         ArrayList<obstacles> obstacles = game.getObstacles();
@@ -147,22 +144,16 @@ public class viewGame extends View
 
 
 
-        playerColour = new Paint();
-        playerColour.setColor(Color.RED);
-
 //        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
         player = Bitmap.createScaledBitmap(player, (int) (width*.2), (int) (.2*width), true);
         canvas.drawBitmap(player, (float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), null);
 
-        textColour = new Paint();
-        textColour.setColor(Color.BLACK);
-        textColour.setTextSize(30);
 
         checkObstaclesPassed(game.getObstPassed());
 
         if(onDeathInsult){
             //Lav et insult når playeren dør
-            insultGenerator.insult(0);
+            //insultGenerator.insult(0);
             onDeathInsult = false;
             canvas.drawRect(0, 0, width, height, backColor2);
             deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366*width), true);
