@@ -8,11 +8,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * Created by deltager on 06-07-17.
@@ -55,12 +53,10 @@ public class viewGame extends View
     public void setup(Context context) {
         onDeathInsult = false;
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
-        træ1 = BitmapFactory.decodeResource(this.getResources(), R.mipmap.traeer_stor_web);
+        træ1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.tree_v2);
         player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ball);
         deathscreen = BitmapFactory.decodeResource(this.getResources(), R.drawable.deathscreenweb);
         //TODO: Brug den her som constructor for viewGame
-        makeNewGame(context);
-
         b1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b1);
         b2 = BitmapFactory.decodeResource(this.getResources(),R.drawable.b2);
         b3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b3);
@@ -79,6 +75,7 @@ public class viewGame extends View
         b16 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b16);
         b17 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b17);
         b18 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b18);
+        makeNewGame(context);
 
     }
 
@@ -86,6 +83,7 @@ public class viewGame extends View
         if(!(timing == null)&&timing.isAlive())        {
             timing.interrupt();
         }
+        ct = 0;
         game = new Game(gameContext);
         game.newObstacle();
         game.newObstacle();
@@ -151,11 +149,11 @@ public class viewGame extends View
 
         Paint backColor = new Paint();
         Paint backColor2 = new Paint();
-        backColor.setColor(Color.GREEN);
+       // backColor.setColor(Color.GREEN);
         backColor2.setColor(Color.BLACK);
 
         //Background
-        canvas.drawRect(0, 0, width, height, backColor);
+        //canvas.drawRect(0, 0, width, height, backColor);
 
 
 
@@ -211,15 +209,12 @@ public class viewGame extends View
             case 16:
                 canvas.drawBitmap(b17, 0, 0, null);
                 break;
-            case 17:
+            default:
                 canvas.drawBitmap(b18, 0, 0, null);
                 ct = 0;
                 break;
         }
 
-        //Colour of the obstacle
-        obstColour = new Paint();
-        obstColour.setColor(Color.BLUE);
 
         //Arraylist of the current obstacles
         ArrayList<obstacles> obstacles = game.getObstacles();
@@ -237,7 +232,7 @@ public class viewGame extends View
         {
             float p = (float) (0.05 * width + o.getPath() * 0.3 * width);
             o.setxPos(p);
-            float temp = (float) (0.3 * width);
+
             //canvas.drawBitmap(p, o.getyPos(), p + temp, o.getyPos() + temp, null);
             canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
             //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
@@ -278,18 +273,19 @@ public class viewGame extends View
         @Override
         public void run()  {
             try   {
-                int j = 0;
+                double j = 0;
                 while (game.getIsAlive())    {
                     Thread.sleep(1000 / 60);
-                    //60fp
+                    //60fps
                     j++;
                     insultTimer++;
                 if (insultTimer >= 300)    {
                     printInsult = true;
                 }
-                if (j == 10)    {
+                if (j == 6)    {
                     ct++;
                     j = 0;
+
                 }
                 updateObject = true;
 
@@ -308,7 +304,7 @@ public class viewGame extends View
 
     public void checkObstaclesPassed (int obstPassed)
     {
-        if(obstPassed >= 10 && printInsult) {
+        if(obstPassed >= 20 && printInsult) {
             insultGenerator.insult(1);
             printInsult = false;
             insultTimer = 0;

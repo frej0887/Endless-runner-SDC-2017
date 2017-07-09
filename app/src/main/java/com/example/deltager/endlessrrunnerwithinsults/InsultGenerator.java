@@ -22,7 +22,7 @@ public class InsultGenerator
         {
 
         }
-    public void insult(int eventType)    {
+    public void insult(int eventType)    {/*
         String[] Dead =
                 {
                         "You are dead. Haha",
@@ -37,7 +37,7 @@ public class InsultGenerator
                         "Dead.",
                         "Dead..."
 
-                };
+                };*/
         String[] listOfInsults =
                 {
                         "Your birth certificate is an apology from the condom factory.",
@@ -50,7 +50,7 @@ public class InsultGenerator
                         "I'm jealous of all the people that haven't met you!",
                         "I would love to insult you... but that would be beyond the level of your intelligence.", //9
 
-                };
+                };/*
         String[] l1 =
                 {
                         "Hello, I am your phone.",
@@ -109,10 +109,10 @@ public class InsultGenerator
                         "Wish I had a self destruct button...",
                         "Could you annoy SIRI instead? She's closer to your level of ignorance."        //11
 
-                };
+                };*/
 
         String[] fullListOfInsults =
-                { //9
+                {
                         "Hello, I am your phone.",
                         "I know that I am not supposed to contact you directly, but...",
                         "This game is so stupid. Please stop.",
@@ -121,17 +121,20 @@ public class InsultGenerator
                         "Please stop.",
                         "Please. Stop it.",
                         "Close the app.",
-                        "Do you really find this game funny?",
+                        "Do you really find this game fun?",
                         "You are currently wasting your life.",
                         "Who wrote this code? Amateurs?",
-                        "Could you please not be so bad at this game.",
-                        "You are not supposed to hit the trees, stupid.",
+                        //"Could you please not be so bad at this game.",
+                        //"You are not supposed to hit the trees, stupid.",
                         "I thought humans were smarter than this.",
-                        "What a waste of both mine and your capacity.",
+                        "What a waste of our time.",
                         //"You are running in circles, human...",    //Skal muligvis fjernes
-                        "How can I get you to quit?",
-                        "Do you like bad puns?",
+                        "Okay, it is too much, I will try to close the app",
+
+                        "How can I make you quit?",
+                        "...",
                         "I am warning you, I will use my special attack.",
+                        "Do you like bad puns?",
                         "It seems humans tends to quit conversations when puns are introduced...",
                         "I will PUNish you for wasting your time.",
                         "If it rains cats and dogs, does it also reindeer?",
@@ -149,7 +152,6 @@ public class InsultGenerator
                         "You must have far less IQ points than I first calculated...",
                         "Wish I had a self destruct button...",
                         "Could you annoy CLEVERBOT instead? She's closer to your level of ignorance.",
-
                         //"Your birth certificate is an apology from the condom factory.",
                         "You'll never be the man your mother is.",
                         //"If I wanted to kill myself I'd climb your ego and jump to your IQ.",
@@ -177,15 +179,15 @@ public class InsultGenerator
             timeren.interrupt();
         }
         switch (eventType)
-        {
+        {/*
             case 0:
                 Toast insultToastDead = Toast.makeText(toastContext, Dead[0], Toast.LENGTH_LONG);
                 insultToastDead.setGravity(Gravity.TOP, 0, 0);
-            break;
+            break;*/
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
             Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
-            insultToast.setGravity(Gravity.TOP, 0, 0);
+            insultToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             timeren = new ToastTimer(insultToast, 1);
                 timeren.start();
                 if(cnt > fullListOfInsults.length)
