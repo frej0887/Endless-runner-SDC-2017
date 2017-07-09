@@ -1,5 +1,6 @@
 package com.example.deltager.endlessrrunnerwithinsults;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -16,11 +17,13 @@ public class Game {
     int obstPassed;
     InsultGenerator insultG;
 
-    public Game(){
+    public Game(Context gameContext){
+
         obstacles = new ArrayList<>();
         player = new Player();
         isAlive = true;
         obstPassed = 0;
+         insultG = new InsultGenerator(gameContext);
     }
 
     public ArrayList<com.example.deltager.endlessrrunnerwithinsults.obstacles> getObstacles() {
@@ -54,7 +57,6 @@ public class Game {
                 obstacles.remove(i);
                 obstPassed++;
                 newObstacle();
-                checkObstaclesPassed(getObstPassed());
             }
 
         }
@@ -76,11 +78,5 @@ public class Game {
     //TODO lav en metode som kaldes regulært fra timeren og som finder ud af om spilleren er kollideret med et objekt
     //TODO lav en metode som kaldes regulært fra timeren som fjerer obstacles fra listen hvis de er ude af skærmen
 
-    public void checkObstaclesPassed (int obstPassed)
-    {
-        if(obstPassed >= 10) {
-            insultG.insult(1);      //Crasher ved kaldet til insult metoden.
-        }
 
-    }
 }

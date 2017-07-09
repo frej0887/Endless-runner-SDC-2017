@@ -22,11 +22,12 @@ public class viewGame extends View
 {
     ArrayList<obstacles> obstacle;
     Game game;
-    int width, height;
+    int width, height, insultTimer;
     Paint obstColour, playerColour, textColour;
     Timer timing;
     Bitmap background, træ1, player, deathscreen;
     boolean init, onDeathInsult;
+    boolean printInsult = false;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
@@ -57,16 +58,21 @@ public class viewGame extends View
         player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ballweb);
         deathscreen = BitmapFactory.decodeResource(this.getResources(), R.mipmap.deathscreenweb);
         //TODO: Brug den her som constructor for viewGame
-        makeNewGame();
+        makeNewGame(context);
 
 
     }
-    public void makeNewGame()
+    public void makeNewGame(Context gameContext)
     {
-        game = new Game();
+        if(!(timing == null)&&timing.isAlive())
+        {
+            timing.interrupt();
+        }
+        game = new Game(gameContext);
         game.newObstacle();
         game.newObstacle();
         init = true;
+        insultTimer = 0;
 
         postInvalidate();
         timing = new Timer();
@@ -152,6 +158,8 @@ public class viewGame extends View
         textColour.setColor(Color.BLACK);
         textColour.setTextSize(30);
 
+        checkObstaclesPassed(game.getObstPassed());
+
         if(onDeathInsult){
             //Lav et insult når playeren dør
             insultGenerator.insult(0);
@@ -173,17 +181,16 @@ public class viewGame extends View
         @Override
         public void run()
         {
+            try
+            {
             while (game.getIsAlive())
             {
-
-
-                try
-                {
                     Thread.sleep(1000 / 60);
                     //60fps
-                } catch (InterruptedException e)
-                {
-                    //Do nothing here
+
+                insultTimer++;
+                if (insultTimer >= 300){
+                    printInsult = true;
                 }
                 for (obstacles o : game.getObstacles())
                 {
@@ -199,7 +206,21 @@ public class viewGame extends View
             }
             onDeathInsult = true;
             postInvalidate();
+                } catch (InterruptedException e)
+            {
+                //Do nothing here
+            }
         }
+    }
+
+    public void checkObstaclesPassed (int obstPassed)
+    {
+        if(obstPassed >= 10 && printInsult) {
+            insultGenerator.insult(1);
+            printInsult = false;
+            insultTimer = 0;
+        }
+
     }
 }
 

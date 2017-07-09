@@ -1,6 +1,7 @@
 package com.example.deltager.endlessrrunnerwithinsults;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -26,6 +27,7 @@ public class MainActivity extends Activity  {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         view = (viewGame) findViewById(R.id.gameView);
+        final Context me = this;
 
         view.setOnTouchListener(new View.OnTouchListener()
         {
@@ -40,7 +42,7 @@ public class MainActivity extends Activity  {
                 {
                     case MotionEvent.ACTION_DOWN:
                         if(!screen.getAlive()){
-                            screen.makeNewGame();
+                            screen.makeNewGame(me);
                         }
 
                         if( x < (screen.getViewGameWidth() / 2))

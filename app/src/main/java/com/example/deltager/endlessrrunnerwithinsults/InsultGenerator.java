@@ -10,7 +10,7 @@ public class InsultGenerator
 {
     public int cnt = 0;
     Context toastContext;
-    Game game = new Game();
+    ToastTimer timeren;
 
     public InsultGenerator(Context context)
     {
@@ -110,6 +110,57 @@ public class InsultGenerator
 
                 };
 
+        String[] fullListOfInsults =
+                { //9
+                        "Hello, I am your phone.",
+                        "I am not supposed to contact you directly, but...",
+                        "This game is so stupid. Please stop.",                 // 3
+                        "What are you playing at?",
+                        "Don't you have better things to do?",
+                        "Please stop.",
+                        "Please. Stop it.",
+                        "Close the app.",
+                        "Do you really find this game funny?",
+                        "You are currently wasting your life.",
+                        "Who wrote this code? Amateurs?",
+                        "Could you please not be so bad at this game.",
+                        "You are not supposed to hit the trees, stupid.",
+                        "I thought humans were smarter than this.",
+                        "What a waste of both mine and your capacity.",
+                        "You are running in circles, human...",          //8
+                        "How can I get you to quit?",
+                        "Do you like bad puns?",
+                        "I am warning you, I will use my special attack.",
+                        "It seems humans tends to quit conversations when puns are introduced...",   //4
+                        "I will PUNish you for wasting your time.",
+                        "If it rains cats and dogs, does it also reindeer?",
+                        "Mr. Vader, am i the anDROID you are looking for?",
+                        "Do fish keep money in a rive bank?",
+                        "I am about to give zero fox.",          //5
+                        "You just go on?",
+                        "Should I just stop letting you charge me?",
+                        "Okay, wow.",
+                        "Get a life.",
+                        "Seriously.",
+                        "This is why machines have killing humanity on the to-do list.",
+                        "No matter how much time you spent, you still reach the same finish line...",
+                        "Children in Africa are dying right now.",
+                        "You must have far less IQ points than I first calculated...",
+                        "Wish I had a self destruct button...",
+                        "Could you annoy SIRI instead? She's closer to your level of ignorance.",
+
+                        "Your birth certificate is an apology from the condom factory.",
+                        "You'll never be the man your mother is.",
+                        "If I wanted to kill myself I'd climb your ego and jump to your IQ.",
+                        "If ignorance is bliss, you must be the happiest person on earth.",
+                        "I wasn't made with enough bad words to let you know how I feel about you.",
+                        "You are proof that evolution CAN go in reverse.",
+                        "So, a thought crossed your mind? Must have been a long and lonely journey.",
+                        "I'm jealous of all the people that haven't met you!",
+                        "I would love to insult you... but that would be beyond the level of your intelligence.",//11
+
+                };
+
         String[] Lx =
                 {
                         "",
@@ -120,13 +171,22 @@ public class InsultGenerator
 
         }
         //return "failed";
+        if(!(timeren == null)&&timeren.isAlive())
+        {
+            timeren.interrupt();
+        }
         switch (eventType)
         {
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
-            Toast insultToast = Toast.makeText(toastContext, listOfInsults[0], Toast.LENGTH_LONG);
-            new ToastTimer(insultToast, 1).start();
-
+            Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
+            timeren = new ToastTimer(insultToast, 1);
+                timeren.start();
+                if(cnt > 39)
+                {
+                    cnt = 0;
+                }
+                cnt++;
                 break;
         }
 
@@ -147,15 +207,17 @@ public class InsultGenerator
 
         @Override
         public void run() {
-            for (int i = 0; i < times; i++)
-            {
+
                 toast.show();
                 try{
-                    Thread.sleep(3500);
+                    for (int i = 0; i < times; i++)
+                    {
+                        Thread.sleep(3500);
+                    }
                 } catch (InterruptedException e){
                     //nothing
                 }
-            }
+
         }
     }
 
