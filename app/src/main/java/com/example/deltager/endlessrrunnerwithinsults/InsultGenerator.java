@@ -1,6 +1,7 @@
 package com.example.deltager.endlessrrunnerwithinsults;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.Toast;
 
 /**
@@ -180,6 +181,7 @@ public class InsultGenerator
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
             Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
+            insultToast.setGravity(Gravity.TOP, 0, 0);
             timeren = new ToastTimer(insultToast, 1);
                 timeren.start();
                 if(cnt > 39)
