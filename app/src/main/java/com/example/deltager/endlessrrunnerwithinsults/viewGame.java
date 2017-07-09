@@ -57,7 +57,7 @@ public class viewGame extends View
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         træ1 = BitmapFactory.decodeResource(this.getResources(), R.mipmap.traeer_stor_web);
         player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ball);
-        deathscreen = BitmapFactory.decodeResource(this.getResources(), R.mipmap.deathscreenweb);
+        deathscreen = BitmapFactory.decodeResource(this.getResources(), R.drawable.deathscreenweb);
         //TODO: Brug den her som constructor for viewGame
         makeNewGame(context);
 
