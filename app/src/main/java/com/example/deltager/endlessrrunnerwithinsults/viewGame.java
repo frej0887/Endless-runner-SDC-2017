@@ -27,7 +27,7 @@ public class viewGame extends View
     Bitmap b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18;
     boolean init, onDeathInsult, updateObject;
     boolean printInsult = false;
-    int ct;
+    int ct, d_ct;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
@@ -253,10 +253,12 @@ public class viewGame extends View
 
         if(!game.getIsAlive())  {
             //Lav et insult når playeren dør
-            //insultGenerator.insult(0);
+            d_ct++;
+            insultGenerator.setDeathCount(d_ct);
             game.setObstPassed(0);
             canvas.drawRect(0, 0, width, height, backColor2);
             deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366*width), true);
+
             canvas.drawBitmap(deathscreen, 0, height/2 - deathscreen.getHeight()/2, null);
         }
 

@@ -12,17 +12,22 @@ public class InsultGenerator
     public int cnt = 0;
     Context toastContext;
     ToastTimer timeren;
+    public int deathCount;
 
     public InsultGenerator(Context context)
     {
         toastContext = context;
     }
 
-    public void insult()
-        {
+    public int getDeathCount(){
+        return deathCount;
+    }
+    public void setDeathCount(int deathCnt){
+        deathCount = deathCnt;
+    }
 
-        }
-    public void insult(int eventType)    {/*
+
+    public void insult(int eventType)    {
         String[] Dead =
                 {
                         "You are dead. Haha",
@@ -37,7 +42,7 @@ public class InsultGenerator
                         "Dead.",
                         "Dead..."
 
-                };*/
+                };
         String[] listOfInsults =
                 {
                         "Your birth certificate is an apology from the condom factory.",
@@ -170,31 +175,41 @@ public class InsultGenerator
 
                 };
 
-        switch (eventType) {
 
-        }
         //return "failed";
         if(!(timeren == null)&&timeren.isAlive())
         {
             timeren.interrupt();
         }
+
+
+
+
+
         switch (eventType)
-        {/*
+        {
             case 0:
-                Toast insultToastDead = Toast.makeText(toastContext, Dead[0], Toast.LENGTH_LONG);
-                insultToastDead.setGravity(Gravity.TOP, 0, 0);
-            break;*/
+
+            break;
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
+                if(deathCount > 1) {
+                    Toast insultToastDead = Toast.makeText(toastContext, Dead[deathCount] , Toast.LENGTH_LONG);
+                    insultToastDead.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                    timeren = new ToastTimer(insultToastDead, 1);
+                    timeren.start();
+
+                }
             Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
             insultToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             timeren = new ToastTimer(insultToast, 1);
                 timeren.start();
-                if(cnt > fullListOfInsults.length)
+                cnt++;
+                if(cnt > fullListOfInsults.length-1)
                 {
                     cnt = 0;
                 }
-                cnt++;
+
                 break;
         }
 
