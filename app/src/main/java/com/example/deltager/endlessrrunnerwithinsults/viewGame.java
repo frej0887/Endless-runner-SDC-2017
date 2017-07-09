@@ -28,6 +28,7 @@ public class viewGame extends View
     Bitmap background, træ1, player, deathscreen;
     boolean init, onDeathInsult;
     boolean printInsult = false;
+    int deathCnt = 0;
 
     InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
@@ -62,8 +63,13 @@ public class viewGame extends View
 
 
     }
+
+    public int getDeathCnt() {
+        return deathCnt;
+    }
     public void makeNewGame(Context gameContext)
     {
+        deathCnt++;
         if(!(timing == null)&&timing.isAlive())
         {
             timing.interrupt();
@@ -130,6 +136,7 @@ public class viewGame extends View
         //Draw obstacle for ones which are currently in use
         for (obstacles o : obstacles)
         {
+            //TODO Crash her pga multiple access
             float p = (float) (0.05 * width + o.getPath() * 0.3 * width);
             o.setxPos(p);
             float temp = (float) (0.3 * width);
@@ -151,10 +158,10 @@ public class viewGame extends View
 
         checkObstaclesPassed(game.getObstPassed());
 
-        if(onDeathInsult){
+        if(!game.getIsAlive()){
             //Lav et insult når playeren dør
             //insultGenerator.insult(0);
-            onDeathInsult = false;
+            game.setObstPassed(0);
             canvas.drawRect(0, 0, width, height, backColor2);
             deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366*width), true);
             canvas.drawBitmap(deathscreen, 0, height/2 - deathscreen.getHeight()/2, null);

@@ -59,14 +59,14 @@ public class MainActivity extends Activity  {
                         }
 
                         //Trykkes
-                        break;
+                        return true;
                     case MotionEvent.ACTION_MOVE:
                         //Swipes
-                        break;
+                        return false;
                     case MotionEvent.ACTION_UP:
                         //Stop af tryk
                         //screen.setPlayerX(screen.getViewGameWidth() / 2);
-                        break;
+                        return false;
                 }
                 return true;
             }

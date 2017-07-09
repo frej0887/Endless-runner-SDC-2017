@@ -17,6 +17,7 @@ public class Game {
     int obstPassed;
     InsultGenerator insultG;
 
+
     public Game(Context gameContext){
 
         obstacles = new ArrayList<>();
