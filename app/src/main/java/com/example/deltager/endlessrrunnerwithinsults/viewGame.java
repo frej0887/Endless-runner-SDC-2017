@@ -27,7 +27,7 @@ public class viewGame extends View
     Timer timing;
     Bitmap background, træ1, player, deathscreen;
     Bitmap b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18;
-    boolean init, onDeathInsult;
+    boolean init, onDeathInsult, updateObject;
     boolean printInsult = false;
     int ct;
 
@@ -90,6 +90,7 @@ public class viewGame extends View
         game.newObstacle();
         game.newObstacle();
         init = true;
+        updateObject = true;
         insultTimer = 0;
 
         postInvalidate();
@@ -152,8 +153,6 @@ public class viewGame extends View
         Paint backColor2 = new Paint();
         backColor.setColor(Color.GREEN);
         backColor2.setColor(Color.BLACK);
-
-
 
         //Background
         canvas.drawRect(0, 0, width, height, backColor);
@@ -226,6 +225,14 @@ public class viewGame extends View
         ArrayList<obstacles> obstacles = game.getObstacles();
 
         //Draw obstacle for ones which are currently in use
+        if(updateObject){
+            updateObject = false;
+            for (obstacles o : game.getObstacles()) {
+                o.setyPos((float) (o.getyPos() + width * .02));
+                game.coll(o.getxPos(), o.getyPos(), width);
+            }
+            game.checkObstacles(height);
+        }
         for (obstacles o : obstacles)
         {
             float p = (float) (0.05 * width + o.getPath() * 0.3 * width);
@@ -249,19 +256,15 @@ public class viewGame extends View
 
         checkObstaclesPassed(game.getObstPassed());
 
-        if(onDeathInsult){
-            //Make insult when you die
-            insultGenerator.insult(0);
-            onDeathInsult = false;
-        if(!game.getIsAlive()) {
+        if(!game.getIsAlive())  {
             //Lav et insult når playeren dør
             //insultGenerator.insult(0);
             game.setObstPassed(0);
             canvas.drawRect(0, 0, width, height, backColor2);
-            deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366 * width), true);
-            canvas.drawBitmap(deathscreen, 0, height / 2 - deathscreen.getHeight() / 2, null);
+            deathscreen = Bitmap.createScaledBitmap(deathscreen, width, (int) (0.85366*width), true);
+            canvas.drawBitmap(deathscreen, 0, height/2 - deathscreen.getHeight()/2, null);
         }
-        }
+
     }
 
     public boolean getAlive(){
@@ -288,13 +291,10 @@ public class viewGame extends View
                     ct++;
                     j = 0;
                 }
-                for (obstacles o : game.getObstacles())   {
-                    o.setyPos((float)(o.getyPos() + width*.02));
-                    game.coll(o.getxPos(), o.getyPos(), width);
-                }
-                game.checkObstacles(height);
+                updateObject = true;
 
                 //TODO: Kald postInvalidate() når grafik skal opdateres
+                updateObject = true;
                 postInvalidate();
                 }
             onDeathInsult = true;
