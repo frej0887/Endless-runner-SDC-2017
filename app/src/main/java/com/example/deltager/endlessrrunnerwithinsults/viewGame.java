@@ -24,7 +24,8 @@ public class viewGame extends View
     Paint obstColour, playerColour, textColour;
     Timer timing;
     Bitmap background, træ1, player, deathscreen;
-    Bitmap b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18;
+    Bitmap b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18; //Backgrounds
+    Bitmap ba1, ba2, ba3, ba4, ba5, ba6, ba7, ba8, ba9, ba10, ba11, ba12, ba13; //Balls
     boolean init, onDeathInsult, updateObject;
     boolean printInsult = false;
     int ct, d_ct;
@@ -56,16 +57,17 @@ public class viewGame extends View
         træ1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.tree_v2);
         player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ball);
         deathscreen = BitmapFactory.decodeResource(this.getResources(), R.drawable.deathscreenweb);
+
         //TODO: Brug den her som constructor for viewGame
-        b1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b1);
-        b2 = BitmapFactory.decodeResource(this.getResources(),R.drawable.b2);
-        b3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b3);
-        b4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b4);
-        b5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b5);
-        b6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b6);
-        b7 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b7);
-        b8 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b8);
-        b9 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b9);
+        b1  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b1);
+        b2  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b2);
+        b3  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b3);
+        b4  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b4);
+        b5  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b5);
+        b6  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b6);
+        b7  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b7);
+        b8  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b8);
+        b9  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b9);
         b10 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b10);
         b11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b11);
         b12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b12);
@@ -75,8 +77,21 @@ public class viewGame extends View
         b16 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b16);
         b17 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b17);
         b18 = BitmapFactory.decodeResource(this.getResources(), R.drawable.b18);
-        makeNewGame(context);
 
+        ba1  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball1web);
+        ba2  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball2web);
+        ba3  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball3web);
+        ba4  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball4web);
+        ba5  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball5web);
+        ba6  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball6web);
+        ba7  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball7web);
+        ba8  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball8web);
+        ba9  = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball9web);
+        ba10 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball10web);
+        ba11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball11web);
+        ba12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball12web);
+        ba13 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball13web);
+        makeNewGame(context);
     }
 
     public void makeNewGame(Context gameContext)    {
@@ -126,7 +141,7 @@ public class viewGame extends View
             //Image scaling
             træ1 = Bitmap.createScaledBitmap(træ1, (int) (0.3 * width) + 1, (int) (0.3 * width) + 1, true);
 
-            b1 = Bitmap.createScaledBitmap(b1, width, height , true);
+            b1 = Bitmap.createScaledBitmap(b1, width, height, true);
             b2 = Bitmap.createScaledBitmap(b2, width, height, true);
             b3 = Bitmap.createScaledBitmap(b3, width, height, true);
             b4 = Bitmap.createScaledBitmap(b4, width, height, true);
@@ -144,6 +159,20 @@ public class viewGame extends View
             b16 = Bitmap.createScaledBitmap(b16, width, height, true);
             b17 = Bitmap.createScaledBitmap(b17, width, height, true);
             b18 = Bitmap.createScaledBitmap(b18, width, height, true);
+
+            ba1 = Bitmap.createScaledBitmap(ba1, (int)(width*.2), (int)(width*.2), true);
+            ba2 = Bitmap.createScaledBitmap(ba2, (int)(width*.2), (int)(width*.2), true);
+            ba3 = Bitmap.createScaledBitmap(ba3, (int)(width*.2), (int)(width*.2), true);
+            ba4 = Bitmap.createScaledBitmap(ba4, (int)(width*.2), (int)(width*.2), true);
+            ba5 = Bitmap.createScaledBitmap(ba5, (int)(width*.2), (int)(width*.2), true);
+            ba6 = Bitmap.createScaledBitmap(ba6, (int)(width*.2), (int)(width*.2), true);
+            ba7 = Bitmap.createScaledBitmap(ba7, (int)(width*.2), (int)(width*.2), true);
+            ba8 = Bitmap.createScaledBitmap(ba8, (int)(width*.2), (int)(width*.2), true);
+            ba9 = Bitmap.createScaledBitmap(ba9, (int)(width*.2), (int)(width*.2), true);
+            ba10 = Bitmap.createScaledBitmap(ba10, (int)(width*.2), (int)(width*.2), true);
+            ba11 = Bitmap.createScaledBitmap(ba11, (int)(width*.2), (int)(width*.2), true);
+            ba12 = Bitmap.createScaledBitmap(ba12, (int)(width*.2), (int)(width*.2), true);
+            ba13 = Bitmap.createScaledBitmap(ba13, (int)(width*.2), (int)(width*.2), true);
         }
         //Background colour
 
@@ -157,7 +186,7 @@ public class viewGame extends View
 
 
 
-        switch(ct)    {
+        switch(ct % 16)    {
             case 0:
                 canvas.drawBitmap(b1, 0, 0, null);
                 break;
@@ -211,9 +240,53 @@ public class viewGame extends View
                 break;
             default:
                 canvas.drawBitmap(b18, 0, 0, null);
-                ct = 0;
                 break;
         }
+
+    switch(ct % 13)    {
+        case 0:
+            canvas.drawBitmap(ba1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 1:
+            canvas.drawBitmap(ba2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 2:
+            canvas.drawBitmap(ba3, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 3:
+            canvas.drawBitmap(ba4, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 4:
+            canvas.drawBitmap(ba5, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 5:
+            canvas.drawBitmap(ba6, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 6:
+            canvas.drawBitmap(ba7, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 7:
+            canvas.drawBitmap(ba8, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 8:
+            canvas.drawBitmap(ba9, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 9:
+            canvas.drawBitmap(ba10, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 10:
+            canvas.drawBitmap(ba11, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 11:
+            canvas.drawBitmap(ba12, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        case 12:
+            canvas.drawBitmap(ba13, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+        default:
+            canvas.drawBitmap(player, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+            break;
+    }
 
 
         //Arraylist of the current obstacles
@@ -228,16 +301,13 @@ public class viewGame extends View
             }
             game.checkObstacles(height);
         }
-        for (obstacles o : obstacles)
-        {
+        for (obstacles o : obstacles)    {
             float p = (float) (0.05 * width + o.getPath() * 0.3 * width);
             o.setxPos(p);
 
             //canvas.drawBitmap(p, o.getyPos(), p + temp, o.getyPos() + temp, null);
             canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
             //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
-
-
         }
 
         //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
@@ -245,8 +315,8 @@ public class viewGame extends View
 
 
 //        canvas.drawCircle(width/2, game.getPlayer().getyPos(), (float) (.1*width), playerColour);
-        player = Bitmap.createScaledBitmap(player, (int) (width*.2), (int) (.2*width), true);
-        canvas.drawBitmap(player, (float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), null);
+//        player = Bitmap.createScaledBitmap(player, (int) (width*.2), (int) (.2*width), true);
+//        canvas.drawBitmap(player, (float) (game.getPlayer().getxPos() - .1 * width), (float) (game.getPlayer().getyPos() - .1 * width), null);
 
 
         checkObstaclesPassed(game.getObstPassed());
@@ -287,7 +357,6 @@ public class viewGame extends View
                 if (j == 6)    {
                     ct++;
                     j = 0;
-
                 }
                 updateObject = true;
 

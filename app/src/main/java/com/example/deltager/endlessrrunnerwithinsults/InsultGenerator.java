@@ -193,13 +193,13 @@ public class InsultGenerator
             break;
             case 1:
             //Det er muligt at den crasher pga toastContext eller toastTimer
-                if(deathCount > 1) {
+                /*if(deathCount > 1) {
                     Toast insultToastDead = Toast.makeText(toastContext, Dead[deathCount] , Toast.LENGTH_LONG);
                     insultToastDead.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                     timeren = new ToastTimer(insultToastDead, 1);
                     timeren.start();
 
-                }
+                }*/
             Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
             insultToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             timeren = new ToastTimer(insultToast, 1);
