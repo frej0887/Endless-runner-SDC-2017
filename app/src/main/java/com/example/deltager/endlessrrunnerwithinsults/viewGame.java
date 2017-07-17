@@ -26,18 +26,22 @@ public class viewGame extends View
     Bitmap background, træ1, player, deathscreen;
     Bitmap b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18; //Backgrounds
     Bitmap ba1, ba2, ba3, ba4, ba5, ba6, ba7, ba8, ba9, ba10, ba11, ba12, ba13; //Balls
+    Bitmap s1, s2, door;                                                              //Steffen-relateret
     boolean init, onDeathInsult, updateObject;
     boolean printInsult = false;
+    public boolean steffenMode = false;
     int ct, d_ct;
 
-    InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
+    InsultGenerator insultGenerator = new InsultGenerator(getContext());
 
     public viewGame(Context context)
     {
         super(context);
         setup(context);
+
     }
+
 
     public viewGame(Context context, @Nullable AttributeSet attrs)
     {
@@ -51,12 +55,17 @@ public class viewGame extends View
         setup(context);
     }
 
+
+
+
     public void setup(Context context) {
         onDeathInsult = false;
         //TODO: Hent alt den grafik I skal bruge ind i feltvariabler
         træ1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.tree_v2);
+        door = BitmapFactory.decodeResource(this.getResources(), R.drawable.door);
         player = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ball);
         deathscreen = BitmapFactory.decodeResource(this.getResources(), R.drawable.deathscreenweb);
+
 
         //TODO: Brug den her som constructor for viewGame
         b1  = BitmapFactory.decodeResource(this.getResources(), R.drawable.b1);
@@ -91,6 +100,9 @@ public class viewGame extends View
         ba11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball11web);
         ba12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball12web);
         ba13 = BitmapFactory.decodeResource(this.getResources(), R.drawable.ball13web);
+
+        s1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.normal);
+        s2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.glad);
         makeNewGame(context);
     }
 
@@ -115,13 +127,23 @@ public class viewGame extends View
         return insultGenerator;
     }
 
+    public void setSteffen(boolean state) {
+        if(steffenMode) {
+            steffenMode = false;
+        } else {
+            steffenMode = state;
+        }
+
+    }
+
     public void setPlayerX(float x) {
-       game.getPlayer().setxPos(x);
+        game.getPlayer().setxPos(x);
     }
 
     public float getViewGameWidth() {
         return width;
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -140,6 +162,7 @@ public class viewGame extends View
 
             //Image scaling
             træ1 = Bitmap.createScaledBitmap(træ1, (int) (0.3 * width) + 1, (int) (0.3 * width) + 1, true);
+            door =  Bitmap.createScaledBitmap(door, (int) (0.3 * width) + 1, (int) (0.3 * width) + 1, true);
 
             b1 = Bitmap.createScaledBitmap(b1, width, height, true);
             b2 = Bitmap.createScaledBitmap(b2, width, height, true);
@@ -173,12 +196,15 @@ public class viewGame extends View
             ba11 = Bitmap.createScaledBitmap(ba11, (int)(width*.2), (int)(width*.2), true);
             ba12 = Bitmap.createScaledBitmap(ba12, (int)(width*.2), (int)(width*.2), true);
             ba13 = Bitmap.createScaledBitmap(ba13, (int)(width*.2), (int)(width*.2), true);
+
+            s1 = Bitmap.createScaledBitmap(s1, (int)(width*.2), (int)(width*.2), true);
+            s2 = Bitmap.createScaledBitmap(s2, (int)(width*.2), (int)(width*.2), true);
         }
         //Background colour
 
         Paint backColor = new Paint();
         Paint backColor2 = new Paint();
-       // backColor.setColor(Color.GREEN);
+        // backColor.setColor(Color.GREEN);
         backColor2.setColor(Color.BLACK);
 
         //Background
@@ -243,50 +269,97 @@ public class viewGame extends View
                 break;
         }
 
-    switch(ct % 13)    {
-        case 0:
-            canvas.drawBitmap(ba1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 1:
-            canvas.drawBitmap(ba2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 2:
-            canvas.drawBitmap(ba3, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 3:
-            canvas.drawBitmap(ba4, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 4:
-            canvas.drawBitmap(ba5, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 5:
-            canvas.drawBitmap(ba6, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 6:
-            canvas.drawBitmap(ba7, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 7:
-            canvas.drawBitmap(ba8, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 8:
-            canvas.drawBitmap(ba9, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 9:
-            canvas.drawBitmap(ba10, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 10:
-            canvas.drawBitmap(ba11, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 11:
-            canvas.drawBitmap(ba12, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        case 12:
-            canvas.drawBitmap(ba13, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-        default:
-            canvas.drawBitmap(player, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
-            break;
-    }
+        if(steffenMode) {
+            switch(ct % 13)    {
+                case 0:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 1:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 2:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 3:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 4:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 5:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 6:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 7:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 8:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 9:
+                    canvas.drawBitmap(s1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 10:
+                    canvas.drawBitmap(s2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 11:
+                    canvas.drawBitmap(s2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 12:
+                    canvas.drawBitmap(s2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                default:
+                    canvas.drawBitmap(s2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+            }
+
+        } else {
+            switch(ct % 13)    {
+                case 0:
+                    canvas.drawBitmap(ba1, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 1:
+                    canvas.drawBitmap(ba2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 2:
+                    canvas.drawBitmap(ba3, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 3:
+                    canvas.drawBitmap(ba4, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 4:
+                    canvas.drawBitmap(ba5, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 5:
+                    canvas.drawBitmap(ba6, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 6:
+                    canvas.drawBitmap(ba7, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 7:
+                    canvas.drawBitmap(ba8, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 8:
+                    canvas.drawBitmap(ba9, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 9:
+                    canvas.drawBitmap(ba10, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 10:
+                    canvas.drawBitmap(ba11, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 11:
+                    canvas.drawBitmap(ba12, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                case 12:
+                    canvas.drawBitmap(ba13, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+                default:
+                    canvas.drawBitmap(player, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
+                    break;
+            }}
 
 
         //Arraylist of the current obstacles
@@ -306,7 +379,11 @@ public class viewGame extends View
             o.setxPos(p);
 
             //canvas.drawBitmap(p, o.getyPos(), p + temp, o.getyPos() + temp, null);
-            canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
+            if(!steffenMode) {
+                canvas.drawBitmap(træ1, o.getxPos(), o.getyPos(), null);
+            } else {
+                canvas.drawBitmap(door, o.getxPos(), o.getyPos(), null);
+            }
             //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
         }
 
@@ -322,7 +399,7 @@ public class viewGame extends View
         checkObstaclesPassed(game.getObstPassed());
 
         if(!game.getIsAlive())  {
-            //Lav et insult når playeren dør
+            //Lav et insult når playeren door
             d_ct++;
             insultGenerator.setDeathCount(d_ct);
             game.setObstPassed(0);
@@ -351,23 +428,23 @@ public class viewGame extends View
                     //60fps
                     j++;
                     insultTimer++;
-                if (insultTimer >= 300)    {
-                    printInsult = true;
-                }
-                if (j == 6)    {
-                    ct++;
-                    j = 0;
-                }
-                updateObject = true;
+                    if (insultTimer >= 300)    {
+                        printInsult = true;
+                    }
+                    if (j == 6)    {
+                        ct++;
+                        j = 0;
+                    }
+                    updateObject = true;
 
-                //TODO: Kald postInvalidate() når grafik skal opdateres
-                updateObject = true;
-                postInvalidate();
+                    //TODO: Kald postInvalidate() når grafik skal opdateres
+                    updateObject = true;
+                    postInvalidate();
                 }
-            onDeathInsult = true;
-            postInvalidate();
+                onDeathInsult = true;
+                postInvalidate();
             }
-                catch (InterruptedException e)  {
+            catch (InterruptedException e)  {
                 //Do nothing here
             }
         }
@@ -383,4 +460,3 @@ public class viewGame extends View
 
     }
 }
-

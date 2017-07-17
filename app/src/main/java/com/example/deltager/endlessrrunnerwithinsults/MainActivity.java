@@ -29,6 +29,13 @@ public class MainActivity extends Activity  {
         view = (viewGame) findViewById(R.id.gameView);
         final Context me = this;
 
+        final Button onSteffen = findViewById(R.id.steffenButton);
+        onSteffen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                view.setSteffen(true);
+            }});
+
+
         view.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
