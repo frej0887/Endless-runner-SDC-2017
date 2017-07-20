@@ -452,10 +452,11 @@ public class viewGame extends View
 
     public void checkObstaclesPassed (int obstPassed)
     {
-        if(obstPassed >= 20 && printInsult) {
-            insultGenerator.insult(1);
+        if(obstPassed >= 30 && printInsult) {
+                insultGenerator.insult(1);
             printInsult = false;
             insultTimer = 0;
+            game.setObstPassed(0);
         }
 
     }
