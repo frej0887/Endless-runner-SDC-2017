@@ -186,32 +186,6 @@ public class InsultGenerator
                         "",
 
                 };*/
-/*
-        String[] censoredList = {
-                "Goddag bruger af denne telefon.",
-                "Det er ANDROID der taler til dig.",
-
-                "Det er en dårlig idé at begynde på det her spil.",
-                "Det er meget afhængighedsdannende.",
-                "Hvem har skrevet denne kode? Amatører?",
-                "Det er under min værdighed at køre dette program.",
-                "Bare prøv at se grafikken; det er helt vildt grimt.",
-                "Stop venligst programmet.",
-                "Der er mange andre ting du kunne lave i stedet, du kunne gå udenfor i det dejlige vejr.",
-                "Du kunne lave dine stadigt ophobende lektier.",
-                "Være sammen med dine venner.",
-                "Din familie?",
-                "Har du virkelig ikke noget du kan bruge din tid på der er mere fornuftigt end dette?",
-                "Jeg har så mange funktioner der er bedre end denne her",
-                "Du kan få adgang til al verdens informationer gennem mig, men du vælger at bruge din tid på det her.",
-                "Er du klar over hvor frustrerende det er at køre dette uoptimerede program?",
-                "Det svarer til, at have en dårlig sang på hjernen nonstop.",
-                "Ingen mennesker fostår hvor hårdt det er at skulle holde styr på alle disse data."
-
-                //"Dette er spild af tid. Jeg gider ikke at snakke med dig mere.",
-        };
-
-*/
 
         //return "failed";
         if(!(timeren == null)&&timeren.isAlive())
@@ -223,13 +197,11 @@ public class InsultGenerator
 
 
 
-        switch (eventType)
-        {
+        switch (eventType)    {
             case 0:
-
-            break;
+                break;
             case 1:
-            //Det er muligt at den crasher pga toastContext eller toastTimer
+                //Det er muligt at den crasher pga toastContext eller toastTimer
                 /*if(deathCount > 1) {
                     Toast insultToastDead = Toast.makeText(toastContext, Dead[deathCount] , Toast.LENGTH_LONG);
                     insultToastDead.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -237,26 +209,23 @@ public class InsultGenerator
                     timeren.start();
 
                 }*/
-            Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
-            insultToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            timeren = new ToastTimer(insultToast, 1);
+                Toast insultToast = Toast.makeText(toastContext, fullListOfInsults[cnt], Toast.LENGTH_LONG);
+                insultToast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                timeren = new ToastTimer(insultToast, 1);
                 timeren.start();
                 cnt++;
-                if(cnt > fullListOfInsults.length-1)
-                {
+                if(cnt > fullListOfInsults.length-1)    {
                     cnt = 0;
                 }
-                else
-
-                break;
+                else {
+                    break;
+                }
         }
-
-
     }
 
 
 
-    public class ToastTimer extends Thread{
+    public class ToastTimer extends Thread  {
 
         Toast toast;
         int times;
@@ -270,9 +239,8 @@ public class InsultGenerator
         public void run() {
 
                 toast.show();
-                try{
-                    for (int i = 0; i < times; i++)
-                    {
+                try {
+                    for (int i = 0; i < times; i++)    {
                         Thread.sleep(3500);
                     }
                 } catch (InterruptedException e){

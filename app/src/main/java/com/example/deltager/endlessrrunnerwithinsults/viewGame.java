@@ -20,7 +20,7 @@ public class viewGame extends View
 {
     ArrayList<obstacles> obstacle;
     Game game;
-    int width, height, insultTimer;
+    int width, height, insultTimer, playerPath;
     Paint obstColour, playerColour, textColour;
     Timer timing;
     Bitmap background, træ1, player, deathscreen;
@@ -112,8 +112,8 @@ public class viewGame extends View
         }
         ct = 0;
         game = new Game(gameContext);
-        game.newObstacle();
-        game.newObstacle();
+        game.newObstacle(game.getPlayer().getPath());
+        game.newObstacle(game.getPlayer().getPath());
         init = true;
         updateObject = true;
         insultTimer = 0;
@@ -139,6 +139,9 @@ public class viewGame extends View
     public void setPlayerX(float x) {
         game.getPlayer().setxPos(x);
     }
+    public void setPlayerPath(int x) {
+        game.getPlayer().setPlayerPath(x, width);
+    }
 
     public float getViewGameWidth() {
         return width;
@@ -158,7 +161,7 @@ public class viewGame extends View
 
             //Player pos
             game.getPlayer().setyPos((float) (0.875 * height));
-            game.getPlayer().setxPos((float) (width / 2));
+            game.getPlayer().setPlayerPath(1, width);
 
             //Image scaling
             træ1 = Bitmap.createScaledBitmap(træ1, (int) (0.3 * width) + 1, (int) (0.3 * width) + 1, true);
@@ -314,7 +317,6 @@ public class viewGame extends View
                     canvas.drawBitmap(s2, (int) (game.getPlayer().getxPos() - .1 * width), (int)(game.getPlayer().getyPos() - .1 * width), null);
                     break;
             }
-
         } else {
             switch(ct % 13)    {
                 case 0:
@@ -386,7 +388,6 @@ public class viewGame extends View
             }
             //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
         }
-
         //canvas.drawBitmap(træ1, 0, height - træ1.getHeight(), null);
 
 
@@ -416,9 +417,7 @@ public class viewGame extends View
     }
 
 
-    class Timer extends Thread
-    {
-
+    class Timer extends Thread    {
         @Override
         public void run()  {
             try   {
@@ -431,6 +430,7 @@ public class viewGame extends View
                     if (insultTimer >= 300)    {
                         printInsult = true;
                     }
+                    // j er tæller til frames på baggrund og player
                     if (j == 6)    {
                         ct++;
                         j = 0;

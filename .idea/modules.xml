@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Endless-runner-SDC-2017.iml" filepath="$PROJECT_DIR$/Endless-runner-SDC-2017.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Endless-runner-SDC-2017.iml" filepath="$PROJECT_DIR$/Endless-runner-SDC-2017.iml" />
       <module fileurl="file://$PROJECT_DIR$/EndlessRrunnerWithInsults.iml" filepath="$PROJECT_DIR$/EndlessRrunnerWithInsults.iml" />
       <module fileurl="file://$PROJECT_DIR$/SDC2017-EndlessRunner.iml" filepath="$PROJECT_DIR$/SDC2017-EndlessRunner.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

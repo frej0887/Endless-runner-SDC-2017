@@ -10,6 +10,7 @@ public class Player {
 
     float xPos;
     float yPos;
+    int path;
 
     public Player(){
         xPos = 0;
@@ -34,12 +35,19 @@ public class Player {
     public void setyPos(float yPos) {
         this.yPos = yPos;
     }
-
-    public void objectPassed(float playerY, float obstY )
-    {
+/*
+    public void objectPassed(float playerY, float obstY )    {
 
     }
+*/
+    public int getPath()  {
+        return path;
+    }
 
-
+    public void setPlayerPath(int path, int width) {
+        this.path = path;
+        setxPos((int)(path*.3*width + .2*width));
+        //screen.setPlayerX( (screen.getViewGameWidth() / 2) * 3/10);
+    }
 
 }

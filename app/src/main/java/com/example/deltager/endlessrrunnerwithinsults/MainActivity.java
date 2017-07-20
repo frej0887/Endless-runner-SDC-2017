@@ -45,24 +45,23 @@ public class MainActivity extends Activity  {
                 int y = (int) event.getY();
                 viewGame screen = (viewGame) view;
 
-                switch (event.getAction())
-                {
+                switch (event.getAction())     {
                     case MotionEvent.ACTION_DOWN:
-                        if(!screen.getAlive()){
+                        if(!screen.getAlive())  {
                             screen.makeNewGame(me);
                         }
 
-                        if( x < (screen.getViewGameWidth() / 3))
-                        {
-                            screen.setPlayerX( (screen.getViewGameWidth() / 2) * 3/10);
+                        if( x < (screen.getViewGameWidth() / 3))    {
+                            screen.setPlayerPath(0);
+                            //screen.setPlayerX( (screen.getViewGameWidth() / 2) * 3/10);
                         }
-                        if(x > (screen.getViewGameWidth() / 3) && x < ((screen.getViewGameWidth()) / 3) * 2)
-                        {
-                            screen.setPlayerX( (screen.getViewGameWidth() / 2));
+                        if(x > (screen.getViewGameWidth() / 3) && x < ((screen.getViewGameWidth()) / 3) * 2)    {
+                            screen.setPlayerPath(1);
+                            //screen.setPlayerX( (screen.getViewGameWidth() / 2));
                         }
-                        if(x > ((screen.getViewGameWidth()) / 3) * 2 )
-                        {
-                            screen.setPlayerX( (screen.getViewGameWidth() / 2) * (float)(1.7));
+                        if(x > ((screen.getViewGameWidth()) / 3) * 2 )    {
+                            screen.setPlayerPath(2);
+                            //screen.setPlayerX( (screen.getViewGameWidth() / 2) * (float)(1.7));
                         }
 
                         //Trykkes
@@ -77,7 +76,8 @@ public class MainActivity extends Activity  {
                 }
                 return true;
             }
-        });
+        }
+        );
     }
 }
 
